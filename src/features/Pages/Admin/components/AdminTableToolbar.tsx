@@ -20,7 +20,7 @@ interface IUsersTableToolbarProps {
   onActionComplete: VoidFunction;
 }
 
-export const UsersTableToolbar: FC<IUsersTableToolbarProps> = ({
+export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
   selectedIds,
   onActionComplete,
 }) => {
@@ -90,16 +90,6 @@ export const UsersTableToolbar: FC<IUsersTableToolbarProps> = ({
         >
           <CheckCircleOutline color="success" />
         </IconButton>
-      </Tooltip>
-      <Tooltip title="Log out">
-        <Button
-          color="error"
-          onClick={() => {
-            navigate("/login", { replace: true });
-          }}
-        >
-          log out
-        </Button>
       </Tooltip>
     </Toolbar>
   );

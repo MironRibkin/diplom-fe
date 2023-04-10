@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import {
+  Avatar,
   Button,
   Checkbox,
   Paper,
@@ -14,10 +15,11 @@ import {
   useGetUsersQuery,
   useUnBanUserMutation,
 } from "../api/usersApi";
-import { UsersTableToolbar } from "./UserTableToolbar";
+import { AdminTableToolbar } from "./AdminTableToolbar";
 import { UsersTableHeader } from "./UserTableHeader";
+import {Header} from "../../../Header";
 
-export const UserList: FC = () => {
+export const AdminPage: FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const { data } = useGetUsersQuery();
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -50,12 +52,13 @@ export const UserList: FC = () => {
   const [unBanUser] = useUnBanUserMutation();
 
   return (
-    <Paper sx={{ width: "100%", mb: 1 }}>
-      <UsersTableToolbar
-        selectedIds={selected}
-        onActionComplete={() => setSelected([])}
-      />
+    <Paper sx={{ width: "100%", mb: 2 }}>
       <TableContainer>
+        <Header/>
+        <AdminTableToolbar
+            selectedIds={selected}
+            onActionComplete={() => setSelected([])}
+        />
         <Table aria-labelledby="tableTitle">
           <UsersTableHeader
             numSelected={selected.length}
@@ -89,10 +92,10 @@ export const UserList: FC = () => {
                     <TableCell id={labelId} scope="row">
                       {id}
                     </TableCell>
-                    <TableCell>{firstname}</TableCell>
+                    <TableCell>
+                      <Avatar/>
+                    </TableCell>
                     <TableCell>{email}</TableCell>
-                    <TableCell>{created_at.toString()}</TableCell>
-                    <TableCell>{updated_at.toString()}</TableCell>
                     <TableCell>
                       {status === "BLOCKED" ? (
                         <Button

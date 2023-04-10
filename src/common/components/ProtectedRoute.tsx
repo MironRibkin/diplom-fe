@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useGetUserQuery } from "../../features/Users/api/usersApi";
+import { useGetUserQuery } from "../../features/Pages/Admin/api/usersApi";
 import { FC } from "react";
 
 export const ProtectedRoute: FC<{ children: JSX.Element }> = ({ children }) => {

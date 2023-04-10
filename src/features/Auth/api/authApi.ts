@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ILoginForm } from "../components/Login";
 import { IRegistrationForm } from "../components/Registration";
-import { IUser } from "../../Users/types/users";
+import { IUser } from "../../Pages/Admin/types/users";
 
 interface ICreateUserApiResponse {
   items: IUser[];
