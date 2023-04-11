@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "../types/users";
-import { prepareAuthHeaders } from "../../../../common/utils/prepareAuthHeaders";
+import { prepareAuthHeaders } from "../../../common/utils/prepareAuthHeaders";
 
 interface IGetUsersApiResponse {
   items: IUser[];

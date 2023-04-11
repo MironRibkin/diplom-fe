@@ -1,24 +1,20 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import { alpha, styled } from "@mui/material/styles";
+import { AppBar, Avatar, Box } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Avatar } from "@mui/material";
-import { getDesignTokens } from "./Auth/thems/subject";
 import { useNavigate } from "react-router-dom";
-import { CustomizedSwitches } from "./Auth/thems/Switch";
+
+import { ColorSwitches } from "./ColorSwitch";
+import { HeaderSelectLeague } from "./HeaderSelectLeague";
+import { useTranslation } from "react-i18next";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,14 +52,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "167ch",
+      maxWidth: "100ch",
+      minWidth: "50ch",
     },
   },
 }));
 
 export function Header() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const mode = getDesignTokens;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -105,8 +102,12 @@ export function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {t("common.header.menu.profile")}
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {t("common.header.menu.myAccount")}
+      </MenuItem>
     </Menu>
   );
 
@@ -137,7 +138,7 @@ export function Header() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{t("common.header.menu.profile")}</p>
       </MenuItem>
     </Menu>
   );
@@ -145,7 +146,7 @@ export function Header() {
   return (
     <Box sx={{ flexGrow: 3 }}>
       <AppBar
-        position="static"
+        position="sticky"
         color="default"
         sx={{
           height: 140,
@@ -154,26 +155,17 @@ export function Header() {
         }}
       >
         <Toolbar>
-          <Box
-            marginTop="12"
-            padding="5"
-            display="flex"
-            flexDirection="column"
-            alignItems="start"
-            // justifyContent="center"
+          <Typography
+            variant="h3"
+            noWrap
+            color="green"
+            component="div"
+            fontFamily={"Fira Mono, monospace"}
+            sx={{ display: { xs: "none", sm: "block" } }}
+            onClick={() => navigate("/home")}
           >
-            <Typography
-              variant="h5"
-              noWrap
-              component="div"
-              fontFamily={"Fira Mono"}
-              sx={{ display: { xs: "none", sm: "block" } }}
-              onClick={() => navigate("/home")}
-            >
-              REVIEWS
-            </Typography>
-            <CustomizedSwitches />
-          </Box>
+            REVIEWS
+          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -184,6 +176,10 @@ export function Header() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          <Box display="flex" alignItems="center" marginRight="30px">
+            <ColorSwitches />
+            <HeaderSelectLeague />
+          </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"

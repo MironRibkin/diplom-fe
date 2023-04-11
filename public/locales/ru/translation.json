@@ -1,0 +1,17 @@
+{
+  "common": {
+    "header": {
+      "menu": {
+        "profile": "Профиль",
+        "myAccount": "Мой аккаунт"
+      }
+    }
+  },
+  "features": {
+    "admin": {
+      "adminTableToolbar": {
+        "title": "Пользователи"
+      }
+    }
+  }
+}

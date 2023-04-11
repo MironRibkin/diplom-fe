@@ -31,7 +31,6 @@ export const Login: FC = () => {
   };
 
   useEffect(() => {
-    // if(data)
     if (data?.token) {
       console.log(data.token);
       localStorage.setItem("token", data.token ?? "");

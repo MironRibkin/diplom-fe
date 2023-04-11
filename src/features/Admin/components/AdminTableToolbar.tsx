@@ -1,11 +1,4 @@
-import {
-  alpha,
-  Button,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { alpha, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
 import { Block, CheckCircleOutline, Delete } from "@mui/icons-material";
 import { FC } from "react";
 import {
@@ -14,6 +7,7 @@ import {
   useUnBanUserMutation,
 } from "../api/usersApi";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface IUsersTableToolbarProps {
   selectedIds: string[];
@@ -24,6 +18,7 @@ export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
   selectedIds,
   onActionComplete,
 }) => {
+  const { t } = useTranslation();
   const [deleteUser] = useDeleteUserMutation();
   const [banUser] = useBanUserMutation();
   const [unBanUser] = useUnBanUserMutation();
@@ -58,7 +53,7 @@ export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
           id="tableTitle"
           component="div"
         >
-          Users
+          {t("features.admin.adminTableToolbar.title")}
         </Typography>
       )}
       <Tooltip title="Delete">

@@ -17,7 +17,7 @@ import {
 } from "../api/usersApi";
 import { AdminTableToolbar } from "./AdminTableToolbar";
 import { UsersTableHeader } from "./UserTableHeader";
-import {Header} from "../../../Header";
+import { Header } from "../../../common/components/Header";
 
 export const AdminPage: FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
@@ -54,10 +54,10 @@ export const AdminPage: FC = () => {
   return (
     <Paper sx={{ width: "100%", mb: 2 }}>
       <TableContainer>
-        <Header/>
+        <Header />
         <AdminTableToolbar
-            selectedIds={selected}
-            onActionComplete={() => setSelected([])}
+          selectedIds={selected}
+          onActionComplete={() => setSelected([])}
         />
         <Table aria-labelledby="tableTitle">
           <UsersTableHeader
@@ -93,7 +93,7 @@ export const AdminPage: FC = () => {
                       {id}
                     </TableCell>
                     <TableCell>
-                      <Avatar/>
+                      <Avatar />
                     </TableCell>
                     <TableCell>{email}</TableCell>
                     <TableCell>
