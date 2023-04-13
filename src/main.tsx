@@ -11,6 +11,8 @@ import { Toaster } from "react-hot-toast";
 import { AdminPage } from "./features/Admin/components/AdminPage";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import "./common/i18n";
+import { Home } from "./features/home/Home";
+import { UserProfile } from "./features/Profile/UserProfile";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -22,13 +24,17 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<Registration />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/myProfile" element={<UserProfile />} />
+
             {/*<Route path="/userTable" element={<EnhancedTable />} />*/}
 
             <Route
               path="/home"
               element={
                 // <ProtectedRoute>
-                <AdminPage />
+                <Home />
+
                 // </ProtectedRoute>
               }
             />

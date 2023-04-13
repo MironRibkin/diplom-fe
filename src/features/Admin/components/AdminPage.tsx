@@ -66,61 +66,59 @@ export const AdminPage: FC = () => {
             rowCount={data?.items.length || 0}
           />
           <TableBody>
-            {data?.items.map(
-              ({ email, firstname, id, status, created_at, updated_at }) => {
-                const isItemSelected = selected.indexOf(id) !== -1;
-                const labelId = `enhanced-table-checkbox-${id}`;
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={id}
-                    selected={isItemSelected}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
+            {data?.items.map(({ email, firstname, id, status }) => {
+              const isItemSelected = selected.indexOf(id) !== -1;
+              const labelId = `enhanced-table-checkbox-${id}`;
+              return (
+                <TableRow
+                  hover
+                  onClick={(event) => handleClick(event, id)}
+                  role="checkbox"
+                  aria-checked={isItemSelected}
+                  tabIndex={-1}
+                  key={id}
+                  selected={isItemSelected}
+                >
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      color="primary"
+                      checked={isItemSelected}
+                      inputProps={{
+                        "aria-labelledby": labelId,
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell id={labelId} scope="row">
+                    {id}
+                  </TableCell>
+                  <TableCell>
+                    <Avatar />
+                  </TableCell>
+                  <TableCell>{email}</TableCell>
+                  <TableCell>
+                    {status === "BLOCKED" ? (
+                      <Button
+                        color="error"
+                        onClick={() => {
+                          unBanUser([id]);
                         }}
-                      />
-                    </TableCell>
-                    <TableCell id={labelId} scope="row">
-                      {id}
-                    </TableCell>
-                    <TableCell>
-                      <Avatar />
-                    </TableCell>
-                    <TableCell>{email}</TableCell>
-                    <TableCell>
-                      {status === "BLOCKED" ? (
-                        <Button
-                          color="error"
-                          onClick={() => {
-                            unBanUser([id]);
-                          }}
-                        >
-                          Block
-                        </Button>
-                      ) : (
-                        <Button
-                          color="success"
-                          onClick={() => {
-                            banUser([id]);
-                          }}
-                        >
-                          ACTIVE
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                );
-              }
-            )}
+                      >
+                        Block
+                      </Button>
+                    ) : (
+                      <Button
+                        color="success"
+                        onClick={() => {
+                          banUser([id]);
+                        }}
+                      >
+                        ACTIVE
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
