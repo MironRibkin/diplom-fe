@@ -1,8 +1,11 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import {
   Avatar,
+  Box,
+  Breadcrumbs,
   Button,
   Checkbox,
+  Link,
   Paper,
   Table,
   TableBody,
@@ -18,6 +21,8 @@ import {
 import { AdminTableToolbar } from "./AdminTableToolbar";
 import { UsersTableHeader } from "./UserTableHeader";
 import { Header } from "../../../common/components/Header";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const AdminPage: FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
@@ -50,15 +55,39 @@ export const AdminPage: FC = () => {
 
   const [banUser] = useBanUserMutation();
   const [unBanUser] = useUnBanUserMutation();
-
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <Paper sx={{ width: "100%", mb: 2 }}>
       <TableContainer>
         <Header />
+        <Box margin="5px">
+          <div role="presentation">
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link
+                sx={{ cursor: "pointer" }}
+                underline="hover"
+                color="inherit"
+                onClick={() => navigate("/home")}
+              >
+                {t("breadcrumbs.home")}
+              </Link>
+              <Link
+                sx={{ cursor: "pointer" }}
+                underline="hover"
+                color="inherit"
+                onClick={() => navigate("/admin")}
+              >
+                {t("breadcrumbs.admin")}
+              </Link>
+            </Breadcrumbs>
+          </div>
+        </Box>
         <AdminTableToolbar
           selectedIds={selected}
           onActionComplete={() => setSelected([])}
         />
+
         <Table aria-labelledby="tableTitle">
           <UsersTableHeader
             numSelected={selected.length}

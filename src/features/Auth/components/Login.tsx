@@ -11,6 +11,8 @@ import React, { FC, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoginMutation } from "../api/authApi";
+import { useTranslation } from "react-i18next";
+import { HeaderSelectLeague } from "../../../common/components/HeaderSelectLeague";
 
 export interface ILoginForm {
   email: string;
@@ -38,11 +40,13 @@ export const Login: FC = () => {
     }
   }, [data?.token]);
 
+  const { t } = useTranslation();
+
   return (
     <Container component="main" maxWidth="xs">
       <Stack mt={6} alignItems="center">
         <Typography component="h1" variant="h5">
-          Sign in
+          {t("auth.login.title")}
         </Typography>
         <Box
           component="form"
@@ -79,12 +83,15 @@ export const Login: FC = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {t("auth.login.title")}
           </Button>
 
-          <Grid container>
+          <Grid container display="flex" justifyContent="space-between">
             <Grid item>
-              <Link to="/signUp">Don't have an account? Sign Up</Link>
+              <Link to="/signUp">{t("auth.login.registration")}</Link>
+            </Grid>
+            <Grid item>
+              <HeaderSelectLeague />
             </Grid>
           </Grid>
         </Box>

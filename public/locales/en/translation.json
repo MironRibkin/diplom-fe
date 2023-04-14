@@ -1,11 +1,29 @@
 {
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "registration": "Don't have an account? Sign Up"
+    },
+    "registration": {
+      "title": "Sign up",
+      "login": "Already have an account? Sign in"
+
+
+
+    }
+  },
   "common": {
     "header": {
       "menu": {
         "profile": "Profile",
-        "myAccount": "My Account"
+        "myAccount": "Admin Account"
       }
     }
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "admin": "Admin menu",
+    "profile": "Profile"
   },
   "features": {
     "admin": {

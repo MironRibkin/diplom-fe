@@ -1,6 +1,6 @@
 import * as React from "react";
 import { alpha, styled } from "@mui/material/styles";
-import { AppBar, Avatar, Box } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Fab } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -11,7 +11,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
-
 import { ColorSwitches } from "./ColorSwitch";
 import { HeaderSelectLeague } from "./HeaderSelectLeague";
 import { useTranslation } from "react-i18next";
@@ -19,7 +18,7 @@ import { useTranslation } from "react-i18next";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "25px",
-  backgroundColor: alpha(theme.palette.common.white, 0.25),
+  backgroundColor: alpha(theme.palette.common.black, 0.25),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.black, 0.15),
   },
@@ -51,8 +50,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    height: "35px",
     [theme.breakpoints.up("md")]: {
-      maxWidth: "100ch",
+      maxWidth: "150ch",
+      width: "130ch",
       minWidth: "50ch",
     },
   },
@@ -103,10 +104,14 @@ export function Header() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        {t("common.header.menu.profile")}
+        <div onClick={() => navigate("/myProfile")}>
+          {t("common.header.menu.profile")}
+        </div>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        {t("common.header.menu.myAccount")}
+        <div onClick={() => navigate("/admin")}>
+          {t("common.header.menu.myAccount")}
+        </div>
       </MenuItem>
     </Menu>
   );
@@ -155,17 +160,20 @@ export function Header() {
         }}
       >
         <Toolbar>
-          <Typography
-            variant="h3"
-            noWrap
-            color="green"
-            component="div"
-            fontFamily={"Fira Mono, monospace"}
-            sx={{ display: { xs: "none", sm: "block" } }}
-            onClick={() => navigate("/home")}
-          >
-            REVIEWS
-          </Typography>
+          <Box bgcolor="green" borderRadius="27px" padding="5px">
+            <Typography
+              // variant="h3"
+              noWrap
+              color="white"
+              component="div"
+              fontSize="27px"
+              fontFamily={"Fira Mono, monospace"}
+              sx={{ display: { xs: "none", sm: "block", cursor: "pointer" } }}
+              onClick={() => navigate("/home")}
+            >
+              REVIEWS
+            </Typography>
+          </Box>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

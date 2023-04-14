@@ -1,11 +1,26 @@
 {
+  "auth": {
+    "login": {
+      "title": "Войти",
+      "registration": "Регистрация"
+    },
+    "registration": {
+      "title": "Регистрация",
+      "login": "Уже есть аккаунт? Войти"
+    }
+  },
   "common": {
     "header": {
       "menu": {
         "profile": "Профиль",
-        "myAccount": "Мой аккаунт"
+        "myAccount": "Админ аккаунт"
       }
     }
+  },
+  "breadcrumbs": {
+    "home": "Главная",
+    "admin": "Админ меню",
+    "profile": "Профиль"
   },
   "features": {
     "admin": {

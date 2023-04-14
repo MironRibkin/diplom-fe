@@ -10,9 +10,9 @@ export const HeaderSelectLeague: FC = () => {
       onClick={() => i18n.changeLanguage(i18n.language === "en" ? "ru" : "en")}
       variant="outlined"
       color="success"
-      sx={{ width: "10px", height: "18px" }}
+      sx={{ width: "10px", height: "18px", borderRadius: "10px" }}
     >
-      {i18n.language === "en" ? "Eng" : "Рус"}
+      {i18n.language === "en" ? "En" : "Ру"}
     </Button>
   );
 };

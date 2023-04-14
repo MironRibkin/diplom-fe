@@ -13,23 +13,26 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCreateUserMutation } from "../api/authApi";
-
-export interface IRegistrationForm {
-  firstname: string;
-  // lastName: string;
-  email: string;
-  password: string;
-}
+import { useTranslation } from "react-i18next";
+import { HeaderSelectLeague } from "../../../common/components/HeaderSelectLeague";
+import { IRegistrationApi } from "../api/authApi";
+// export interface IRegistrationForm {
+//   firstname: string;
+//   // lastName: string;
+//   email: string;
+//   password: string;
+// }
 
 export const Registration: FC = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegistrationForm>();
+  } = useForm<IRegistrationApi>();
   const [registration, { isSuccess, data }] = useCreateUserMutation();
 
-  const onSubmit: SubmitHandler<IRegistrationForm> = (payload) => {
+  const onSubmit: SubmitHandler<IRegistrationApi> = (payload) => {
     registration(payload);
   };
 
@@ -55,7 +58,7 @@ export const Registration: FC = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {t("auth.registration.title")}
         </Typography>
         <Box
           component="form"
@@ -66,7 +69,7 @@ export const Registration: FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                {...register("firstname", {
+                {...register("userName", {
                   required: true,
                   maxLength: 20,
                   pattern: /^[A-Za-z]+$/i,
@@ -74,25 +77,11 @@ export const Registration: FC = () => {
                 required
                 fullWidth
                 autoFocus
-                label="First Name"
-                error={!!errors?.firstname}
-                helperText={!!errors?.firstname && "First Name is not valid"}
+                label="Name"
+                error={!!errors?.userName}
+                helperText={!!errors?.userName && "Name is not valid"}
               />
             </Grid>
-            {/*<Grid item xs={12} sm={6}>*/}
-            {/*  <TextField*/}
-            {/*    {...register("lastName", {*/}
-            {/*      required: true,*/}
-            {/*      maxLength: 20,*/}
-            {/*      pattern: /^[A-Za-z]+$/i,*/}
-            {/*    })}*/}
-            {/*    required*/}
-            {/*    fullWidth*/}
-            {/*    label="Last Name"*/}
-            {/*    error={!!errors?.lastName}*/}
-            {/*    helperText={!!errors?.lastName && "Last Name is not valid"}*/}
-            {/*  />*/}
-            {/*</Grid>*/}
             <Grid item xs={12}>
               <TextField
                 {...register("email", {
@@ -125,11 +114,14 @@ export const Registration: FC = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            {t("auth.registration.title")}
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container display="flex" justifyContent="space-between">
             <Grid item>
-              <Link to="/login"> Already have an account? Sign in</Link>
+              <Link to="/login">{t("auth.registration.login")}</Link>
+            </Grid>
+            <Grid item>
+              <HeaderSelectLeague />
             </Grid>
           </Grid>
         </Box>
