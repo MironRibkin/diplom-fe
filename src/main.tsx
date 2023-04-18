@@ -12,7 +12,8 @@ import { AdminPage } from "./features/Admin/components/AdminPage";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import "./common/i18n";
 import { Home } from "./features/home/Home";
-import { UserProfile } from "./features/Profile/UserProfile";
+import { UserProfile } from "./features/Profile/components/UserProfile";
+import { ProtectedRoute } from "./common/components/ProtectedRoute";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -24,20 +25,23 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<Registration />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/myProfile" element={<UserProfile />} />
-
-            {/*<Route path="/userTable" element={<EnhancedTable />} />*/}
-
             <Route
-              path="/home"
+              path="/admin"
               element={
-                // <ProtectedRoute>
-                <Home />
-
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <AdminPage />
+                </ProtectedRoute>
               }
             />
+            <Route
+              path="/myProfile"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/home" element={<Home />} />
           </Routes>
           <Toaster />
         </Provider>

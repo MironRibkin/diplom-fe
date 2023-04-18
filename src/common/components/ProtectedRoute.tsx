@@ -5,9 +5,10 @@ import { useGetUserQuery } from "../../features/Admin/api/usersApi";
 
 export const ProtectedRoute: FC<{ children: JSX.Element }> = ({ children }) => {
   const { isError } = useGetUserQuery(undefined, {
-    skip: localStorage.getItem("token") === null,
+    skip: !localStorage.getItem("token"),
   });
-  if (localStorage.getItem("token") === null) {
+
+  if (!localStorage.getItem("token")) {
     return <Navigate replace to="/login" />;
   }
   if (isError) {

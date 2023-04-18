@@ -7,9 +7,6 @@
     "registration": {
       "title": "Sign up",
       "login": "Already have an account? Sign in"
-
-
-
     }
   },
   "common": {
@@ -20,16 +17,31 @@
       }
     }
   },
+  "admin": {
+    "header": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status"
+    },
+    "page": {
+      "block": "Block",
+      "active": "Active",
+      "role": {
+        "user": "User",
+        "admin": "Admin"
+      }
+    },
+    "toolbar": {
+      "delete": "Delete",
+      "block": "Block",
+      "unblock": "Unblock",
+      "title": "Users"
+    }
+  },
   "breadcrumbs": {
     "home": "Home",
     "admin": "Admin menu",
     "profile": "Profile"
-  },
-  "features": {
-    "admin": {
-      "adminTableToolbar": {
-        "title": "Users"
-      }
-    }
   }
 }

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { ColorSwitches } from "./ColorSwitch";
 import { HeaderSelectLeague } from "./HeaderSelectLeague";
 import { useTranslation } from "react-i18next";
+import { useGetUserQuery } from "../../features/Admin/api/usersApi";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -87,66 +88,11 @@ export function Header() {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <div onClick={() => navigate("/myProfile")}>
-          {t("common.header.menu.profile")}
-        </div>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <div onClick={() => navigate("/admin")}>
-          {t("common.header.menu.myAccount")}
-        </div>
-      </MenuItem>
-    </Menu>
-  );
-
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>{t("common.header.menu.profile")}</p>
-      </MenuItem>
-    </Menu>
-  );
+
+  const { data } = useGetUserQuery(undefined, {
+    skip: !localStorage.getItem("token"),
+  });
 
   return (
     <Box sx={{ flexGrow: 3 }}>
@@ -187,36 +133,106 @@ export function Header() {
           <Box display="flex" alignItems="center" marginRight="30px">
             <ColorSwitches />
             <HeaderSelectLeague />
+            {localStorage.getItem("token") && (
+              <Button
+                onClick={() => {
+                  localStorage.setItem("token", "");
+                  navigate("/login");
+                }}
+              >
+                LOG OUT
+              </Button>
+            )}
           </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
+          {localStorage.getItem("token") ? (
+            <>
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Box>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </Box>
+            </>
+          ) : (
+            <Button onClick={() => navigate("/login")}>LOGIN</Button>
+          )}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>{t("common.header.menu.profile")}</p>
+        </MenuItem>
+      </Menu>
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>
+          <div onClick={() => navigate("/myProfile")}>
+            {t("common.header.menu.profile")}
+          </div>
+        </MenuItem>
+        {data?.role === "admin" && (
+          <MenuItem onClick={handleMenuClose}>
+            <div onClick={() => navigate("/admin")}>
+              {t("common.header.menu.myAccount")}
+            </div>
+          </MenuItem>
+        )}
+      </Menu>
     </Box>
   );
 }

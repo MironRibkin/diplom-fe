@@ -1,46 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "../../Admin/types/users";
-import { ILoginForm } from "../components/Login";
-// import { IRegistrationForm } from "../components/Registration";
-//
-// interface ICreateUserApiResponse {
-//   items: IUser[];
-// }
-//
-// interface ILoginApiResponse {
-//   token: string;
-//   record: IUser;
-// }
-//
-// export const authApi = createApi({
-//   reducerPath: "authApi",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/`,
-//   }),
-//   endpoints: (builder) => ({
-//     login: builder.mutation<ILoginApiResponse, ILoginForm>({
-//       query: (payload) => {
-//         return {
-//           url: "login",
-//           method: "POST",
-//           body: payload,
-//         };
-//       },
-//     }),
-//     createUser: builder.mutation<ICreateUserApiResponse, IRegistrationForm>({
-//       query: (payload: IRegistrationForm) => {
-//         return {
-//           url: "registration",
-//           method: "POST",
-//           body: {
-//             ...payload,
-//             passwordConfirm: payload.password,
-//           },
-//         };
-//       },
-//     }),
-//   }),
-// });
 
 interface IAuthRecord {
   status: boolean;

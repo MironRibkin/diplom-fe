@@ -53,10 +53,10 @@ export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
           id="tableTitle"
           component="div"
         >
-          {t("features.admin.adminTableToolbar.title")}
+          {t("admin.toolbar.title")}
         </Typography>
       )}
-      <Tooltip title="Delete">
+      <Tooltip title={t("admin.toolbar.delete")}>
         <IconButton
           onClick={() => {
             onActionComplete();
@@ -66,7 +66,7 @@ export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
           <Delete />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Block">
+      <Tooltip title={t("admin.toolbar.block")}>
         <IconButton
           onClick={() => {
             onActionComplete();
@@ -76,7 +76,7 @@ export const AdminTableToolbar: FC<IUsersTableToolbarProps> = ({
           <Block color="error" />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Unblock">
+      <Tooltip title={t("admin.toolbar.unblock")}>
         <IconButton
           onClick={() => {
             onActionComplete();

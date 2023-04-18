@@ -17,16 +17,31 @@
       }
     }
   },
+  "admin": {
+    "header": {
+      "name": "Имя",
+      "email": "Почта",
+      "role": "Роль",
+      "status": "Статус"
+    },
+    "page": {
+      "block": "Заблокирован",
+      "active": "Активный",
+      "role": {
+        "user": "Пользователь",
+        "admin": "Админ"
+      }
+    },
+    "toolbar": {
+      "delete": "Удалить",
+      "block": "Заблокировать",
+      "unblock": "Разблокировать",
+      "title": "Пользователи"
+    }
+  },
   "breadcrumbs": {
     "home": "Главная",
     "admin": "Админ меню",
     "profile": "Профиль"
-  },
-  "features": {
-    "admin": {
-      "adminTableToolbar": {
-        "title": "Пользователи"
-      }
-    }
   }
 }

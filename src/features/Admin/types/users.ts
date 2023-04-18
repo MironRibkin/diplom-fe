@@ -1,9 +1,9 @@
 export interface IUser {
   id: string;
-  firstname: string;
-  lastname: string;
+  userName: string;
   email: string;
-  updated_at: Date;
-  created_at: Date;
+  banned: boolean;
+  avatarSrc: string;
+  role: string;
   status: string;
 }

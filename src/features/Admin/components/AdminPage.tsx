@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import {
-  Avatar,
   Box,
   Breadcrumbs,
   Button,
@@ -14,8 +13,10 @@ import {
   TableRow,
 } from "@mui/material";
 import {
+  useAppointAdminMutation,
   useBanUserMutation,
   useGetUsersQuery,
+  useRemoveAdminMutation,
   useUnBanUserMutation,
 } from "../api/usersApi";
 import { AdminTableToolbar } from "./AdminTableToolbar";
@@ -27,9 +28,10 @@ import { useTranslation } from "react-i18next";
 export const AdminPage: FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const { data } = useGetUsersQuery();
+  console.log(data);
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.checked) {
-      const newSelected = data?.items.map((n) => n.id);
+      const newSelected = data?.map((n) => n.id);
       setSelected(newSelected || []);
     } else {
       setSelected([]);
@@ -55,6 +57,8 @@ export const AdminPage: FC = () => {
 
   const [banUser] = useBanUserMutation();
   const [unBanUser] = useUnBanUserMutation();
+  const [appointAdmin] = useAppointAdminMutation();
+  const [removeAdmin] = useRemoveAdminMutation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
@@ -92,10 +96,10 @@ export const AdminPage: FC = () => {
           <UsersTableHeader
             numSelected={selected.length}
             onSelectAllClick={handleSelectAllClick}
-            rowCount={data?.items.length || 0}
+            rowCount={data?.length || 0}
           />
           <TableBody>
-            {data?.items.map(({ email, firstname, id, status }) => {
+            {data?.map(({ email, userName, id, role, banned }) => {
               const isItemSelected = selected.indexOf(id) !== -1;
               const labelId = `enhanced-table-checkbox-${id}`;
               return (
@@ -120,19 +124,29 @@ export const AdminPage: FC = () => {
                   <TableCell id={labelId} scope="row">
                     {id}
                   </TableCell>
-                  <TableCell>
-                    <Avatar />
-                  </TableCell>
+                  <TableCell>{userName}</TableCell>
                   <TableCell>{email}</TableCell>
                   <TableCell>
-                    {status === "BLOCKED" ? (
+                    {role}
+                    {role === "user" ? (
+                      <Button color="error" onClick={() => appointAdmin(id)}>
+                        {t("admin.page.role.user")}
+                      </Button>
+                    ) : (
+                      <Button color="success" onClick={() => removeAdmin(id)}>
+                        {t("admin.page.role.admin")}
+                      </Button>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {banned === true ? (
                       <Button
                         color="error"
                         onClick={() => {
                           unBanUser([id]);
                         }}
                       >
-                        Block
+                        {t("admin.page.block")}
                       </Button>
                     ) : (
                       <Button
@@ -141,7 +155,7 @@ export const AdminPage: FC = () => {
                           banUser([id]);
                         }}
                       >
-                        ACTIVE
+                        {t("admin.page.active")}
                       </Button>
                     )}
                   </TableCell>

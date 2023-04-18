@@ -2,14 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "../types/users";
 import { prepareAuthHeaders } from "../../../common/utils/prepareAuthHeaders";
 
-interface IGetUsersApiResponse {
-  items: IUser[];
-}
-
 export const usersApi = createApi({
   reducerPath: "usersApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/users`,
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/`,
     prepareHeaders: prepareAuthHeaders,
   }),
   tagTypes: ["Users"],
@@ -18,11 +14,9 @@ export const usersApi = createApi({
       invalidatesTags: ["Users"],
       query: (ids) => {
         return {
-          url: `/`,
+          url: "/admin/users",
           method: "DELETE",
-          body: {
-            ids: ids,
-          },
+          body: { ids },
         };
       },
     }),
@@ -30,11 +24,29 @@ export const usersApi = createApi({
       invalidatesTags: ["Users"],
       query: (ids) => {
         return {
-          url: `/block`,
-          method: "PUT",
-          body: {
-            ids: ids,
-          },
+          url: "/admin/users/ban",
+          method: "POST",
+          body: { ids },
+        };
+      },
+    }),
+    appointAdmin: builder.mutation<void, string>({
+      invalidatesTags: ["Users"],
+      query(id) {
+        return {
+          url: "/admin/users/appoint-admin",
+          method: "POST",
+          body: { id },
+        };
+      },
+    }),
+    removeAdmin: builder.mutation<void, string>({
+      invalidatesTags: ["Users"],
+      query(id) {
+        return {
+          url: "/admin/users/remove-admin",
+          method: "POST",
+          body: { id },
         };
       },
     }),
@@ -42,28 +54,26 @@ export const usersApi = createApi({
       invalidatesTags: ["Users"],
       query: (ids) => {
         return {
-          url: `/unblock`,
-          method: "PUT",
-          body: {
-            ids: ids,
-          },
+          url: "/admin/users/unban",
+          method: "POST",
+          body: { ids },
         };
       },
     }),
-    getUsers: builder.query<IGetUsersApiResponse, void>({
+    getUsers: builder.query<IUser[], void>({
       providesTags: ["Users"],
       query: () => {
         return {
-          url: "/all",
+          url: "/admin/users",
         };
       },
     }),
     getUser: builder.query<IUser, void>({
-      providesTags: ["Users"],
       keepUnusedDataFor: 0,
+      providesTags: ["Users"],
       query: () => {
         return {
-          url: "/",
+          url: "/auth/user",
         };
       },
     }),
@@ -71,9 +81,11 @@ export const usersApi = createApi({
 });
 
 export const {
+  useGetUserQuery,
   useGetUsersQuery,
   useDeleteUserMutation,
   useBanUserMutation,
+  useAppointAdminMutation,
+  useRemoveAdminMutation,
   useUnBanUserMutation,
-  useGetUserQuery,
 } = usersApi;
