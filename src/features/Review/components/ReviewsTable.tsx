@@ -10,6 +10,7 @@ import MaterialReactTable from "material-react-table";
 import { useGetReviewsQuery } from "../api/recordsApi";
 import { useLocation, useParams } from "react-router-dom";
 import { ReviewModal } from "./ReviewModal";
+import { useTranslation } from "react-i18next";
 
 export const ReviewsTable: FC = () => {
   const [rowSelection, setRowSelection] = useState({});
@@ -17,6 +18,7 @@ export const ReviewsTable: FC = () => {
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const { data, isLoading } = useGetReviewsQuery(id || "");
   console.log(data);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -88,15 +90,15 @@ export const ReviewsTable: FC = () => {
           },
           {
             accessorKey: "title",
-            header: "title",
+            header: `${t("reviews.table.header.title")}`,
           },
           {
             accessorKey: "recordTitle",
-            header: "record title",
+            header: `${t("reviews.table.header.recordTitle")}`,
           },
           {
             accessorKey: "description",
-            header: "description",
+            header: `${t("reviews.table.header.description")}`,
           },
           // {
           //   accessorKey: "rating",
@@ -104,11 +106,11 @@ export const ReviewsTable: FC = () => {
           // },
           {
             accessorKey: "theme",
-            header: "theme",
+            header: `${t("reviews.table.header.theme")}`,
           },
           {
             accessorKey: "date",
-            header: "date",
+            header: `${t("reviews.table.header.date")}`,
           },
         ]}
       />

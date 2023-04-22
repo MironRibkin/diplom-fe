@@ -33,7 +33,7 @@ export function UserProfile() {
               color="inherit"
               onClick={() => navigate("/Home")}
             >
-              {t("breadcrumbs.Home")}
+              {t("breadcrumbs.home")}
             </Link>
             <Link
               sx={{ cursor: "pointer" }}

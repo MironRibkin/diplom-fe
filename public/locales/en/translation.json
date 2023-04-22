@@ -45,5 +45,32 @@
     "home": "Home",
     "admin": "Admin menu",
     "profile": "Profile"
+  },
+  "reviews": {
+    "modal": {
+      "button": {
+        "close": "Close",
+        "send": "Create"
+      },
+      "reactMde": {
+        "preview": "Preview",
+        "write": "Write"
+      }
+    },
+    "table": {
+      "header": {
+        "title": "Title",
+        "recordTitle": "Review title",
+        "description": "Description",
+        "theme": "Theme",
+        "date": "Date of creation"
+    }
+  }
+},
+  "general": {
+    "themes": {
+      "books": "Books",
+      "film": "Film"
+    }
   }
 }

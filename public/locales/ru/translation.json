@@ -45,5 +45,32 @@
     "home": "Главная",
     "admin": "Админ меню",
     "profile": "Профиль"
+  },
+  "reviews": {
+    "modal": {
+      "button": {
+        "close": "Закрыть",
+        "send": "Создать"
+      },
+      "reactMde": {
+        "preview": "Предварительный просмотр",
+        "write": "Ввод"
+      }
+    },
+    "table": {
+      "header": {
+        "title": "Название",
+        "recordTitle": "Название обзора",
+        "description": "Описание",
+        "theme": "Тема",
+        "date": "Дата создания"
+      }
+    }
+  },
+  "general": {
+    "themes": {
+      "books": "Книги",
+      "film": "Фильмы"
+    }
   }
 }

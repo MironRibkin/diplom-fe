@@ -80,7 +80,7 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
       onClose={onClose}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <Paper sx={{ overflow: "auto", maxHeight: "100%" }}>
+      <Paper sx={{ overflow: "auto", maxHeight: "100%", borderRadius: "25px" }}>
         <Stack
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -96,6 +96,7 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
           <TextField
             {...register("title", { required: true })}
             error={!!errors.title}
+            color="success"
             helperText={!!errors.title && "enter title"}
             size="small"
             autoComplete="title"
@@ -105,6 +106,7 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
           <TextField
             {...register("recordTitle", { required: true })}
             error={!!errors.title}
+            color="success"
             helperText={!!errors.title && "enter recordTitle"}
             size="small"
             autoComplete="recordTitle"
@@ -113,25 +115,21 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
           />
           <FormControl>
             <InputLabel>theme</InputLabel>
-            <Select {...register("theme")} label="theme">
+            <Select {...register("theme")} label="theme" color="success">
               {THEMES.map((value) => (
                 <MenuItem key={value} value={value}>
-                  {t(`general.themes.${value}`)}
+                  {t(`${value}`)}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
           <ReactMde
             // @ts-ignore
-
             l18n={{
-              preview: t(
-                "features.CollectionPage.CreateCollectionModal.reactMde.preview"
-              ),
-              write: t(
-                "features.CollectionPage.CreateCollectionModal.reactMde.write"
-              ),
+              preview: t("reviews.modal.reactMde.preview"),
+              write: t("reviews.modal.reactMde.write"),
             }}
+            color="green"
             value={watch("description")}
             onChange={(value) => setValue("description", value)}
             // @ts-ignore
@@ -146,11 +144,20 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
           {/*  imgSrc={watch("imgSrc")}*/}
           {/*/>*/}
           <Stack direction="row" justifyContent="space-between">
-            <Button onClick={onClose}>
-              {t("features.CollectionPage.CreateCollectionModal.button.close")}
+            <Button
+              onClick={onClose}
+              color="error"
+              sx={{ borderRadius: "25px" }}
+            >
+              {t("reviews.modal.button.close")}
             </Button>
-            <Button variant="contained" type="submit">
-              {t("features.CollectionPage.CreateCollectionModal.button.send")}
+            <Button
+              variant="contained"
+              type="submit"
+              color="success"
+              sx={{ borderRadius: "25px" }}
+            >
+              {t("reviews.modal.button.send")}
             </Button>
           </Stack>
         </Stack>
