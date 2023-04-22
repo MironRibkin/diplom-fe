@@ -48,7 +48,7 @@ export const Login: FC = () => {
       <Container component="main" maxWidth="xs">
         <Stack mt={6} alignItems="center">
           <Typography component="h1" variant="h5">
-            {t("record.login.title")}
+            {t("auth.login.title")}
           </Typography>
           <Box
             component="form"
@@ -85,12 +85,12 @@ export const Login: FC = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {t("record.login.title")}
+              {t("auth.login.title")}
             </Button>
 
             <Grid container display="flex" justifyContent="space-between">
               <Grid item>
-                <Link to="/signUp">{t("record.login.registration")}</Link>
+                <Link to="/signUp">{t("auth.login.registration")}</Link>
               </Grid>
             </Grid>
           </Box>

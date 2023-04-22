@@ -8,7 +8,7 @@ import { green } from "@mui/material/colors";
 import { Settings } from "@mui/icons-material";
 import MaterialReactTable from "material-react-table";
 import { useGetReviewsQuery } from "../api/recordsApi";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ReviewModal } from "./ReviewModal";
 import { useTranslation } from "react-i18next";
 

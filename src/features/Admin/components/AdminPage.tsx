@@ -127,7 +127,6 @@ export const AdminPage: FC = () => {
                   <TableCell>{userName}</TableCell>
                   <TableCell>{email}</TableCell>
                   <TableCell>
-                    {role}
                     {role === "user" ? (
                       <Button color="error" onClick={() => appointAdmin(id)}>
                         {t("admin.page.role.user")}

@@ -53,41 +53,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     height: "35px",
     [theme.breakpoints.up("md")]: {
-      maxWidth: "150ch",
-      width: "130ch",
+      maxWidth: "250ch",
+      // width: "130ch",
       minWidth: "50ch",
     },
   },
 }));
 
-export function Header() {
-  // function stringToColor(string: string) {
-  //   let hash = 0;
-  //   let i;
-  //
-  //   for (i = 0; i < string.length; i += 1) {
-  //     hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  //   }
-  //
-  //   let color = "#";
-  //
-  //   for (i = 0; i < 3; i += 1) {
-  //     const value = (hash >> (i * 8)) & 0xff;
-  //     color += `00${value.toString(16)}`.slice(-2);
-  //   }
-  //
-  //   return color;
-  // }
-  //
-  // function stringAvatar(name: string) {
-  //   return {
-  //     sx: {
-  //       bgcolor: stringToColor(name),
-  //     },
-  //     children: `${name.split(" ")[0][0]}`,
-  //   };
-  // }
+export function stringToColor(string: string) {
+  let hash = 0;
+  let i;
 
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+
+  return color;
+}
+
+export function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -121,6 +112,15 @@ export function Header() {
     skip: !localStorage.getItem("token"),
   });
 
+  function stringAvatar(name: string) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${data?.userName.split(" ")[0][0]}`,
+    };
+  }
+
   return (
     <Box sx={{ flexGrow: 3 }}>
       <AppBar
@@ -133,20 +133,18 @@ export function Header() {
         }}
       >
         <Toolbar>
-          <Box bgcolor="green" borderRadius="27px" padding="5px">
-            <Typography
-              // variant="h3"
-              noWrap
-              color="white"
-              component="div"
-              fontSize="27px"
-              fontFamily={"Fira Mono, monospace"}
-              sx={{ display: { xs: "none", sm: "block", cursor: "pointer" } }}
-              onClick={() => navigate("/Home")}
-            >
-              REVIEWS
-            </Typography>
-          </Box>
+          <Typography
+            // variant="h3"
+            noWrap
+            color="green"
+            component="div"
+            fontSize="27px"
+            fontFamily={"Fira Mono, monospace"}
+            sx={{ display: { xs: "none", sm: "block", cursor: "pointer" } }}
+            onClick={() => navigate("/Home")}
+          >
+            REVIEWS
+          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -173,8 +171,8 @@ export function Header() {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                  {/*<Avatar {...stringAvatar({data.userName})} />*/}
+                  {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />*/}
+                  <Avatar {...stringAvatar(data?.userName || "")} />
                 </IconButton>
               </Box>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>

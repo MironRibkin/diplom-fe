@@ -8,18 +8,34 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { Header } from "../../../common/components/Header";
+import { Header, stringToColor } from "../../../common/components/Header";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReviewsTable } from "../../Review/components/ReviewsTable";
+import { useGetUserQuery } from "../../Admin/api/usersApi";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
 }
 
-export function UserProfile() {
+export const UserProfile = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { data } = useGetUserQuery();
+
+  function stringAvatar(name: string) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        textAlign: "center",
+        width: "140px",
+        height: "140px",
+        fontSize: "70px",
+      },
+      children: `${data?.userName.split(" ")[0][0]}`,
+    };
+  }
+
   return (
     <Paper sx={{ width: "100%", mb: 2, height: "100%" }}>
       <Header />
@@ -57,19 +73,13 @@ export function UserProfile() {
           padding="10px"
           gap="6px"
         >
-          <Avatar
-            sx={{
-              textAlign: "center",
-              width: "120px",
-              height: "120px",
-            }}
-          />
-          <Typography variant="h3">MY NAME</Typography>
-          <Typography fontSize="15px">MY EMAIL </Typography>
-          <Typography variant="h6">Мои работы</Typography>
+          <Avatar {...stringAvatar(data?.userName || "")} />
+          <Typography variant="h4">{data?.userName}</Typography>
+          <Typography fontSize="12px">{data?.email} </Typography>
+          <Typography variant="h6">{t("profile.myReviews")}</Typography>
         </Box>
       </Box>
       <ReviewsTable />
     </Paper>
   );
-}
+};

@@ -46,6 +46,9 @@
     "admin": "Админ меню",
     "profile": "Профиль"
   },
+  "profile": {
+    "myReviews": "Мои обзоры"
+  },
   "reviews": {
     "modal": {
       "button": {

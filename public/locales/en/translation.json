@@ -46,6 +46,9 @@
     "admin": "Admin menu",
     "profile": "Profile"
   },
+  "profile": {
+    "myReviews": "My reviews"
+  },
   "reviews": {
     "modal": {
       "button": {
