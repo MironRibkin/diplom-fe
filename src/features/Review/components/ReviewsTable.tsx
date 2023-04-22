@@ -26,10 +26,7 @@ export const ReviewsTable: FC = () => {
 
       <MaterialReactTable
         enableColumnFilters={false}
-        data={[
-          { id: "1", name: "miron", author: "me", records: "cars" },
-          { id: "2", name: "you", author: "we", records: "cats" },
-        ]}
+        data={data || []}
         localization={
           i18n.language === "en" ? MRT_Localization_EN : MRT_Localization_RU
         }
@@ -90,16 +87,28 @@ export const ReviewsTable: FC = () => {
             header: "id",
           },
           {
-            accessorKey: "name",
-            header: "name",
+            accessorKey: "title",
+            header: "title",
           },
           {
-            accessorKey: "author",
-            header: "author",
+            accessorKey: "recordTitle",
+            header: "record title",
           },
           {
-            accessorKey: "records",
-            header: "records",
+            accessorKey: "description",
+            header: "description",
+          },
+          // {
+          //   accessorKey: "rating",
+          //   header: "rating",
+          // },
+          {
+            accessorKey: "theme",
+            header: "theme",
+          },
+          {
+            accessorKey: "date",
+            header: "date",
           },
         ]}
       />

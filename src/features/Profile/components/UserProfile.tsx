@@ -69,7 +69,7 @@ export function UserProfile() {
           <Typography variant="h6">Мои работы</Typography>
         </Box>
       </Box>
-      {/*<ReviewsTable />*/}
+      <ReviewsTable />
     </Paper>
   );
 }
