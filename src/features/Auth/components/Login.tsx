@@ -36,7 +36,7 @@ export const Login: FC = () => {
   useEffect(() => {
     if (data?.token) {
       localStorage.setItem("token", data.token ?? "");
-      navigate("/home", { replace: true });
+      navigate("/Home", { replace: true });
     }
   }, [data?.token]);
 
@@ -48,7 +48,7 @@ export const Login: FC = () => {
       <Container component="main" maxWidth="xs">
         <Stack mt={6} alignItems="center">
           <Typography component="h1" variant="h5">
-            {t("auth.login.title")}
+            {t("record.login.title")}
           </Typography>
           <Box
             component="form"
@@ -85,12 +85,12 @@ export const Login: FC = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {t("auth.login.title")}
+              {t("record.login.title")}
             </Button>
 
             <Grid container display="flex" justifyContent="space-between">
               <Grid item>
-                <Link to="/signUp">{t("auth.login.registration")}</Link>
+                <Link to="/signUp">{t("record.login.registration")}</Link>
               </Grid>
             </Grid>
           </Box>

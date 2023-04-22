@@ -13,7 +13,9 @@
     "header": {
       "menu": {
         "profile": "Profile",
-        "myAccount": "Admin Account"
+        "myAccount": "Admin Account",
+        "login": "Login",
+        "logOut": "Log out"
       }
     }
   },

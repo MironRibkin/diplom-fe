@@ -61,6 +61,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Header() {
+  // function stringToColor(string: string) {
+  //   let hash = 0;
+  //   let i;
+  //
+  //   for (i = 0; i < string.length; i += 1) {
+  //     hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  //   }
+  //
+  //   let color = "#";
+  //
+  //   for (i = 0; i < 3; i += 1) {
+  //     const value = (hash >> (i * 8)) & 0xff;
+  //     color += `00${value.toString(16)}`.slice(-2);
+  //   }
+  //
+  //   return color;
+  // }
+  //
+  // function stringAvatar(name: string) {
+  //   return {
+  //     sx: {
+  //       bgcolor: stringToColor(name),
+  //     },
+  //     children: `${name.split(" ")[0][0]}`,
+  //   };
+  // }
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -115,7 +142,7 @@ export function Header() {
               fontSize="27px"
               fontFamily={"Fira Mono, monospace"}
               sx={{ display: { xs: "none", sm: "block", cursor: "pointer" } }}
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/Home")}
             >
               REVIEWS
             </Typography>
@@ -133,16 +160,6 @@ export function Header() {
           <Box display="flex" alignItems="center" marginRight="30px">
             <ColorSwitches />
             <HeaderSelectLeague />
-            {localStorage.getItem("token") && (
-              <Button
-                onClick={() => {
-                  localStorage.setItem("token", "");
-                  navigate("/login");
-                }}
-              >
-                LOG OUT
-              </Button>
-            )}
           </Box>
           {localStorage.getItem("token") ? (
             <>
@@ -157,6 +174,7 @@ export function Header() {
                   color="inherit"
                 >
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  {/*<Avatar {...stringAvatar({data.userName})} />*/}
                 </IconButton>
               </Box>
               <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -173,7 +191,9 @@ export function Header() {
               </Box>
             </>
           ) : (
-            <Button onClick={() => navigate("/login")}>LOGIN</Button>
+            <Button onClick={() => navigate("/login")}>
+              {t("common.header.menu.login")}
+            </Button>
           )}
         </Toolbar>
       </AppBar>
@@ -221,10 +241,11 @@ export function Header() {
         onClose={handleMenuClose}
       >
         <MenuItem onClick={handleMenuClose}>
-          <div onClick={() => navigate("/myProfile")}>
+          <div onClick={() => navigate(`/myProfile/${data?.id}`)}>
             {t("common.header.menu.profile")}
           </div>
         </MenuItem>
+
         {data?.role === "admin" && (
           <MenuItem onClick={handleMenuClose}>
             <div onClick={() => navigate("/admin")}>
@@ -232,6 +253,20 @@ export function Header() {
             </div>
           </MenuItem>
         )}
+        <MenuItem onClick={handleMenuClose}>
+          <div>
+            {localStorage.getItem("token") && (
+              <div
+                onClick={() => {
+                  localStorage.setItem("token", "");
+                  navigate("/login");
+                }}
+              >
+                {t("common.header.menu.logOut")}
+              </div>
+            )}
+          </div>
+        </MenuItem>
       </Menu>
     </Box>
   );

@@ -20,7 +20,7 @@ import {
   useUnBanUserMutation,
 } from "../api/usersApi";
 import { AdminTableToolbar } from "./AdminTableToolbar";
-import { UsersTableHeader } from "./UserTableHeader";
+import { UsersTableHeader } from "./AdminTableHeader";
 import { Header } from "../../../common/components/Header";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -72,9 +72,9 @@ export const AdminPage: FC = () => {
                 sx={{ cursor: "pointer" }}
                 underline="hover"
                 color="inherit"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/Home")}
               >
-                {t("breadcrumbs.home")}
+                {t("breadcrumbs.Home")}
               </Link>
               <Link
                 sx={{ cursor: "pointer" }}

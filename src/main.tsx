@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 import { AdminPage } from "./features/Admin/components/AdminPage";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import "./common/i18n";
-import { Home } from "./features/home/Home";
+import { Home } from "./features/Home/Home";
 import { UserProfile } from "./features/Profile/components/UserProfile";
 import { ProtectedRoute } from "./common/components/ProtectedRoute";
 
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <CssBaseline />
         <Provider store={store}>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<Registration />} />
             <Route
@@ -34,7 +34,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               }
             />
             <Route
-              path="/myProfile"
+              path="/myProfile/:id"
               element={
                 <ProtectedRoute>
                   <UserProfile />

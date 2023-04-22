@@ -13,7 +13,9 @@
     "header": {
       "menu": {
         "profile": "Профиль",
-        "myAccount": "Админ аккаунт"
+        "myAccount": "Админ аккаунт",
+        "login": "Войти",
+        "logOut": "Выйти"
       }
     }
   },

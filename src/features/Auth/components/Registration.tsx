@@ -61,7 +61,7 @@ export const Registration: FC = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {t("auth.registration.title")}
+            {t("record.registration.title")}
           </Typography>
           <Box
             component="form"
@@ -117,11 +117,11 @@ export const Registration: FC = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {t("auth.registration.title")}
+              {t("record.registration.title")}
             </Button>
             <Grid container display="flex" justifyContent="space-between">
               <Grid item>
-                <Link to="/login">{t("auth.registration.login")}</Link>
+                <Link to="/login">{t("record.registration.login")}</Link>
               </Grid>
             </Grid>
           </Box>
