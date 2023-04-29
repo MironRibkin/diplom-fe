@@ -54,26 +54,31 @@ export const reviewApi = createApi({
       providesTags: ["Review"],
     }),
 
-    // getCollection: build.query<IReview, string>({
-    //   query(id) {
-    //     return {
-    //       url: `/reviews/one/${id}`,
-    //     };
-    //   },
-    //   providesTags: ["Review"],
-    // }),
+    getReview: build.query<IReview, string>({
+      query(id) {
+        return {
+          url: `/reviews/one/${id}`,
+        };
+      },
+      providesTags: ["Review"],
+    }),
 
-    // deleteCollection: build.mutation<void, string>({
-    //   query(id) {
-    //     return {
-    //       url: "/records",
-    //       method: "DELETE",
-    //       body: { id },
-    //     };
-    //   },
-    //   invalidatesTags: ["Record"],
-    // }),
+    deleteReview: build.mutation<void, string>({
+      query(id) {
+        return {
+          url: "/reviews",
+          method: "DELETE",
+          body: { id },
+        };
+      },
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
-export const { useCreateReviewMutation, useGetReviewsQuery } = reviewApi;
+export const {
+  useCreateReviewMutation,
+  useGetReviewsQuery,
+  useGetReviewQuery,
+  useDeleteReviewMutation,
+} = reviewApi;

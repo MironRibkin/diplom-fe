@@ -51,6 +51,12 @@
   },
   "reviews": {
     "modal": {
+      "general": {
+        "modalName": "Создание обзора",
+        "title": "Заголовок",
+        "recordTitle": "Название обзора",
+        "theme": "Тема"
+      },
       "button": {
         "close": "Закрыть",
         "send": "Создать"
@@ -58,6 +64,9 @@
       "reactMde": {
         "preview": "Предварительный просмотр",
         "write": "Ввод"
+      },
+      "Image": {
+        "addImage": "Добавить изоброжение"
       }
     },
     "table": {

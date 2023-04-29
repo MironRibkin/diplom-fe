@@ -2,28 +2,37 @@ import React, { FC, useState } from "react";
 import i18n from "i18next";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
-import { Box, Button, ListItemIcon, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  ListItemIcon,
+  MenuItem,
+  useMediaQuery,
+} from "@mui/material";
+// import { LoadingButton } from "@mui/lab";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import { green } from "@mui/material/colors";
-import { Settings } from "@mui/icons-material";
+import { Delete, DeleteForever, Settings } from "@mui/icons-material";
 import MaterialReactTable from "material-react-table";
-import { useGetReviewsQuery } from "../api/recordsApi";
+import { useDeleteReviewMutation, useGetReviewsQuery } from "../api/recordsApi";
 import { useParams } from "react-router-dom";
-import { ReviewModal } from "./ReviewModal";
+import { AddReviewModal } from "./AddReviewModal";
 import { useTranslation } from "react-i18next";
+import { ChipDelete } from "@mui/joy";
 
 export const ReviewsTable: FC = () => {
   const [rowSelection, setRowSelection] = useState({});
   const { id } = useParams();
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const { data, isLoading } = useGetReviewsQuery(id || "");
-  console.log(data);
   const { t } = useTranslation();
+  const [deleteReview] = useDeleteReviewMutation();
+  const deviceMediaQuery = useMediaQuery("(min-width:850px)");
 
   return (
     <>
       {isReviewModalOpen && (
-        <ReviewModal onClose={() => setReviewModalOpen(false)} />
+        <AddReviewModal onClose={() => setReviewModalOpen(false)} />
       )}
 
       <MaterialReactTable
@@ -78,9 +87,21 @@ export const ReviewsTable: FC = () => {
             }}
           >
             <ListItemIcon>
-              <Settings />
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<Delete />}
+                color="error"
+                sx={{
+                  textTransform: "none",
+                  "& .MuiButton-startIcon": { margin: { xs: 0 } },
+                }}
+                onClick={() => deleteReview(original.id)}
+              >
+                {deviceMediaQuery ? "delete" : undefined}
+              </Button>
             </ListItemIcon>
-            edit
+            {/*edit*/}
           </MenuItem>,
         ]}
         columns={[

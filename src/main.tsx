@@ -14,6 +14,8 @@ import "./common/i18n";
 import { Home } from "./features/Home/Home";
 import { UserProfile } from "./features/Profile/components/UserProfile";
 import { ProtectedRoute } from "./common/components/ProtectedRoute";
+import "react-mde/lib/styles/css/react-mde-all.css";
+import { ReviewPage } from "./features/Review/components/ReviewPage";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -24,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reviewPage" element={<ReviewPage />} />
             <Route path="/signUp" element={<Registration />} />
             <Route
               path="/admin"

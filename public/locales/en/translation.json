@@ -51,6 +51,12 @@
   },
   "reviews": {
     "modal": {
+      "general": {
+        "modalName": "Create reviews",
+        "title": "Title",
+        "recordTitle": "Record title",
+        "theme": "Theme"
+      },
       "button": {
         "close": "Close",
         "send": "Create"
@@ -58,6 +64,9 @@
       "reactMde": {
         "preview": "Preview",
         "write": "Write"
+      },
+      "Image": {
+        "addImage": "Add image"
       }
     },
     "table": {

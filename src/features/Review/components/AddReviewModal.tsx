@@ -17,6 +17,7 @@ import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import { IReview, useCreateReviewMutation } from "../api/recordsApi";
 import { useParams } from "react-router-dom";
+import { UploadImages } from "./UploadImages";
 
 interface IProps {
   onClose: () => void;
@@ -43,9 +44,18 @@ const converter = new Showdown.Converter({
   tasklists: true,
 });
 
-const THEMES = ["films", "books"];
+const THEMES = [
+  "Films",
+  "Books",
+  "Painting",
+  "Work",
+  "Art",
+  "Sport",
+  "Car",
+  "Animal",
+];
 
-export const ReviewModal: FC<IProps> = ({ onClose }) => {
+export const AddReviewModal: FC<IProps> = ({ onClose }) => {
   const [selectedTab, setSelectedTab] = useState("write");
   const { t } = useTranslation();
   const [createReview, { isLoading, isSuccess }] = useCreateReviewMutation();
@@ -91,7 +101,7 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
           borderRadius="5px"
         >
           <Typography variant="h6" fontWeight="600">
-            Create Reviews
+            {t("reviews.modal.general.modalName")}
           </Typography>
           <TextField
             {...register("title", { required: true })}
@@ -100,7 +110,7 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
             helperText={!!errors.title && "enter title"}
             size="small"
             autoComplete="title"
-            label="title"
+            label={t("reviews.modal.general.title")}
             fullWidth
           />
           <TextField
@@ -110,12 +120,16 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
             helperText={!!errors.title && "enter recordTitle"}
             size="small"
             autoComplete="recordTitle"
-            label="recordTitle"
+            label={t("reviews.modal.general.recordTitle")}
             fullWidth
           />
           <FormControl>
-            <InputLabel>theme</InputLabel>
-            <Select {...register("theme")} label="theme" color="success">
+            <InputLabel>{t("reviews.modal.general.theme")}</InputLabel>
+            <Select
+              {...register("theme")}
+              label={t("reviews.modal.general.theme")}
+              color="success"
+            >
               {THEMES.map((value) => (
                 <MenuItem key={value} value={value}>
                   {t(`${value}`)}
@@ -139,10 +153,10 @@ export const ReviewModal: FC<IProps> = ({ onClose }) => {
               Promise.resolve(converter.makeHtml(markdown))
             }
           />
-          {/*<UploadImages*/}
-          {/*  onChange={(imgSrc) => setValue("imgSrc", imgSrc)}*/}
-          {/*  imgSrc={watch("imgSrc")}*/}
-          {/*/>*/}
+          <UploadImages
+            onChange={(imgSrc) => setValue("imgSrc", imgSrc)}
+            imgSrc={watch("imgSrc")}
+          />
           <Stack direction="row" justifyContent="space-between">
             <Button
               onClick={onClose}
