@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useUploadImage } from "../hooks/UploadImage";
+import { useUploadImage } from "../hooks/useUploadImage";
 
 interface IProps {
   onChange: (imgSrc: string) => void;

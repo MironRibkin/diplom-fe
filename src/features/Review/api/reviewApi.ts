@@ -3,6 +3,7 @@ import { prepareAuthHeaders } from "../../../common/utils/prepareAuthHeaders";
 
 export interface IReview {
   id: string;
+  author: string;
   title: string;
   recordTitle: string;
   theme: string;
@@ -11,7 +12,7 @@ export interface IReview {
   imgSrc: string;
   rating: { value: number; userId: string }[];
   date: string;
-  messages: { sender: string; receiver: string; body: string; date: string }[];
+  messages: { sender: string; body: string; date: string }[];
 }
 
 export const reviewApi = createApi({
@@ -57,7 +58,7 @@ export const reviewApi = createApi({
     getReview: build.query<IReview, string>({
       query(id) {
         return {
-          url: `/reviews/one/${id}`,
+          url: `/reviews/${id}`,
         };
       },
       providesTags: ["Review"],
@@ -73,6 +74,23 @@ export const reviewApi = createApi({
       },
       invalidatesTags: ["Review"],
     }),
+
+    addComment: build.mutation<
+      void,
+      { id?: string; sender?: string; body?: string }
+    >({
+      query(data) {
+        return {
+          url: `/reviews/message/${data.id}`,
+          method: "POST",
+          body: {
+            sender: data.sender,
+            body: data.body,
+          },
+        };
+      },
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -81,4 +99,5 @@ export const {
   useGetReviewsQuery,
   useGetReviewQuery,
   useDeleteReviewMutation,
+  useAddCommentMutation,
 } = reviewApi;

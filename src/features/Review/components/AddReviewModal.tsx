@@ -15,7 +15,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
-import { IReview, useCreateReviewMutation } from "../api/recordsApi";
+import { IReview, useCreateReviewMutation } from "../api/reviewApi";
 import { useParams } from "react-router-dom";
 import { UploadImages } from "./UploadImages";
 

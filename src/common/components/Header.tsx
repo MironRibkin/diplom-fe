@@ -54,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     height: "35px",
     [theme.breakpoints.up("md")]: {
       maxWidth: "250ch",
-      // width: "130ch",
       minWidth: "50ch",
     },
   },
@@ -134,7 +133,6 @@ export function Header() {
       >
         <Toolbar>
           <Typography
-            // variant="h3"
             noWrap
             color="green"
             component="div"
@@ -171,7 +169,6 @@ export function Header() {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />*/}
                   <Avatar {...stringAvatar(data?.userName || "")} />
                 </IconButton>
               </Box>

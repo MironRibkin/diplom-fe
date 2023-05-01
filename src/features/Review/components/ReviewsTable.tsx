@@ -5,20 +5,17 @@ import { MRT_Localization_RU } from "material-react-table/locales/ru";
 import {
   Box,
   Button,
-  Chip,
   ListItemIcon,
   MenuItem,
   useMediaQuery,
 } from "@mui/material";
-// import { LoadingButton } from "@mui/lab";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { Delete, DeleteForever, Settings } from "@mui/icons-material";
 import MaterialReactTable from "material-react-table";
-import { useDeleteReviewMutation, useGetReviewsQuery } from "../api/recordsApi";
-import { useParams } from "react-router-dom";
+import { useDeleteReviewMutation, useGetReviewsQuery } from "../api/reviewApi";
+import { useNavigate, useParams } from "react-router-dom";
 import { AddReviewModal } from "./AddReviewModal";
 import { useTranslation } from "react-i18next";
-import { ChipDelete } from "@mui/joy";
 
 export const ReviewsTable: FC = () => {
   const [rowSelection, setRowSelection] = useState({});
@@ -28,6 +25,7 @@ export const ReviewsTable: FC = () => {
   const { t } = useTranslation();
   const [deleteReview] = useDeleteReviewMutation();
   const deviceMediaQuery = useMediaQuery("(min-width:850px)");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -73,6 +71,15 @@ export const ReviewsTable: FC = () => {
         }}
         enableRowSelection
         onRowSelectionChange={setRowSelection}
+        muiTableBodyRowProps={({ row }) => ({
+          onClick: (event) => {
+            navigate(`/reviewPage/${row.original.id}`);
+            console.log(row);
+          },
+          sx: {
+            cursor: "pointer", //you might want to change the cursor too when adding an onClick
+          },
+        })}
         state={{
           rowSelection,
           isLoading: isLoading,
