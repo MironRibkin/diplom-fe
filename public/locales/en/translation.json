@@ -9,9 +9,15 @@
       "login": "Already have an account? Sign in"
     }
   },
+  "home": {
+    "card": {
+      "cardButton": "Learn More"
+    }
+  },
   "common": {
     "header": {
       "menu": {
+        "search": "Search...",
         "profile": "Profile",
         "myAccount": "Admin Account",
         "login": "Login",
@@ -50,6 +56,14 @@
     "myReviews": "My reviews"
   },
   "reviews": {
+    "review": {
+      "created": "Сreated:",
+      "comments": "Сomments:",
+      "yourComment": "Your Ccmment",
+      "reviewLike": "Did you like this review?",
+      "sendButton": "Send"
+
+    },
     "modal": {
       "general": {
         "modalName": "Create reviews",
@@ -82,7 +96,13 @@
   "general": {
     "themes": {
       "books": "Books",
-      "film": "Film"
+      "film": "Film",
+      "painting": "Painting",
+      "comics": "Comics",
+      "art": "Art",
+      "sport": "Sport",
+      "car": "Cars",
+      "animal": "Animal"
     }
   }
 }

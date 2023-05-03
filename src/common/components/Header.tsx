@@ -129,6 +129,7 @@ export function Header() {
           height: 140,
           display: "flex",
           justifyContent: "center",
+          borderBottomRadius: "25px",
         }}
       >
         <Toolbar>
@@ -148,7 +149,7 @@ export function Header() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder={`${t("common.header.menu.search")}`}
               inputProps={{ "aria-label": "search" }}
             />
           </Search>

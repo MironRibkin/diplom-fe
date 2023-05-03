@@ -28,7 +28,6 @@ import { useTranslation } from "react-i18next";
 export const AdminPage: FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
   const { data } = useGetUsersQuery();
-  console.log(data);
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.checked) {
       const newSelected = data?.map((n) => n.id);
@@ -121,7 +120,7 @@ export const AdminPage: FC = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell id={labelId} scope="row">
+                  <TableCell id={labelId} scope="row" sx={{ overflow: "auto" }}>
                     {id}
                   </TableCell>
                   <TableCell>{userName}</TableCell>

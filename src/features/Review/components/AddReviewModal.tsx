@@ -48,7 +48,7 @@ const THEMES = [
   "Films",
   "Books",
   "Painting",
-  "Work",
+  "Comics",
   "Art",
   "Sport",
   "Car",

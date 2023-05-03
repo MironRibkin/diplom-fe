@@ -12,7 +12,13 @@ export interface IReview {
   imgSrc: string;
   rating: { value: number; userId: string }[];
   date: string;
-  messages: { sender: string; body: string; date: string }[];
+  messages: IMessage[];
+}
+
+export interface IMessage {
+  sender: string;
+  body: string;
+  date: string;
 }
 
 export const reviewApi = createApi({
@@ -50,6 +56,15 @@ export const reviewApi = createApi({
       query(userId) {
         return {
           url: `/reviews/user/${userId}`,
+        };
+      },
+      providesTags: ["Review"],
+    }),
+
+    getReviewsAll: build.query<IReview[], void>({
+      query() {
+        return {
+          url: `/reviews/recent`,
         };
       },
       providesTags: ["Review"],
@@ -100,4 +115,5 @@ export const {
   useGetReviewQuery,
   useDeleteReviewMutation,
   useAddCommentMutation,
+  useGetReviewsAllQuery,
 } = reviewApi;

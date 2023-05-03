@@ -9,9 +9,15 @@
       "login": "Уже есть аккаунт? Войти"
     }
   },
+  "home": {
+    "card": {
+      "cardButton": "Узнать больше"
+    }
+  },
   "common": {
     "header": {
       "menu": {
+        "search": "Поиск...",
         "profile": "Профиль",
         "myAccount": "Админ аккаунт",
         "login": "Войти",
@@ -50,6 +56,13 @@
     "myReviews": "Мои обзоры"
   },
   "reviews": {
+    "review": {
+      "created": "Создал:",
+      "comments": "Комментарии:",
+      "yourComment": "Ваш комментарий",
+      "reviewLike": "Вам понравился этот обзор?",
+      "sendButton": "Отправить"
+    },
     "modal": {
       "general": {
         "modalName": "Создание обзора",
@@ -66,7 +79,7 @@
         "write": "Ввод"
       },
       "Image": {
-        "addImage": "Добавить изоброжение"
+        "addImage": "Добавить изображение"
       }
     },
     "table": {
@@ -82,7 +95,13 @@
   "general": {
     "themes": {
       "books": "Книги",
-      "film": "Фильмы"
+      "film": "Фильмы",
+      "painting": "Картины",
+      "comics": "Комиксы",
+      "art": "Искусство",
+      "sport": "Спорт",
+      "car": "Автомобили",
+      "animal": "Животные"
     }
   }
 }
