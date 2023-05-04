@@ -52,6 +52,23 @@ export const reviewApi = createApi({
       invalidatesTags: ["Review"],
     }),
 
+    editReview: build.mutation<
+      void,
+      { reviewId: string } & Pick<
+        IReview,
+        "title" | "recordTitle" | "description" | "imgSrc" | "theme"
+      >
+    >({
+      query(review) {
+        return {
+          url: `/reviews/${review.reviewId}`,
+          method: "POST",
+          body: review,
+        };
+      },
+      invalidatesTags: ["Review"],
+    }),
+
     getReviews: build.query<IReview[], string>({
       query(userId) {
         return {
@@ -70,6 +87,15 @@ export const reviewApi = createApi({
       providesTags: ["Review"],
     }),
 
+    getHighestRatingReviews: build.query<IReview[], void>({
+      query() {
+        return {
+          url: `/reviews/highest`,
+        };
+      },
+      providesTags: ["Review"],
+    }),
+
     getReview: build.query<IReview, string>({
       query(id) {
         return {
@@ -77,6 +103,16 @@ export const reviewApi = createApi({
         };
       },
       providesTags: ["Review"],
+    }),
+
+    getAllReviews: build.query<IReview[], string>({
+      query(search) {
+        return {
+          url: `/reviews/all?search=${search}`,
+        };
+      },
+      providesTags: ["Review"],
+      keepUnusedDataFor: 0,
     }),
 
     deleteReview: build.mutation<void, string>({
@@ -106,6 +142,24 @@ export const reviewApi = createApi({
       },
       invalidatesTags: ["Review"],
     }),
+
+    addRating: build.mutation<
+      void,
+      { reviewId: string; value: number | null; userId: string }
+    >({
+      query(data) {
+        return {
+          url: `/reviews/rating`,
+          method: "POST",
+          body: {
+            reviewId: data.reviewId,
+            value: data.value,
+            userId: data.userId,
+          },
+        };
+      },
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -116,4 +170,9 @@ export const {
   useDeleteReviewMutation,
   useAddCommentMutation,
   useGetReviewsAllQuery,
+  useGetHighestRatingReviewsQuery,
+  useAddRatingMutation,
+  useEditReviewMutation,
+  useGetAllReviewsQuery,
+  useLazyGetAllReviewsQuery,
 } = reviewApi;

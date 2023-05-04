@@ -8,11 +8,12 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { Header, stringToColor } from "../../../common/components/Header";
+import { Header } from "../../../common/components/Header";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReviewsTable } from "../../Review/components/ReviewsTable";
 import { useGetUserQuery } from "../../Admin/api/usersApi";
+import { stringAvatar } from "../../../common/utils/stringAvatar";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -22,19 +23,6 @@ export const UserProfile = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { data } = useGetUserQuery();
-
-  function stringAvatar(name: string) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-        textAlign: "center",
-        width: "140px",
-        height: "140px",
-        fontSize: "70px",
-      },
-      children: `${data?.userName.split(" ")[0][0]}`,
-    };
-  }
 
   return (
     <Paper sx={{ width: "100%", mb: 2, height: "100%" }}>
@@ -73,7 +61,7 @@ export const UserProfile = () => {
           padding="10px"
           gap="6px"
         >
-          <Avatar {...stringAvatar(data?.userName || "")} />
+          <Avatar {...stringAvatar(data?.userName || "", data?.userName)} />
           <Typography variant="h4">{data?.userName}</Typography>
           <Typography fontSize="12px">{data?.email} </Typography>
           <Typography variant="h6">{t("profile.myReviews")}</Typography>

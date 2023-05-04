@@ -14,57 +14,48 @@ import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ReactMde from "react-mde";
-import * as Showdown from "showdown";
-import { IReview, useCreateReviewMutation } from "../api/reviewApi";
-import { useParams } from "react-router-dom";
+import { IReview, useEditReviewMutation } from "../api/reviewApi";
 import { UploadImages } from "./UploadImages";
+import { converter } from "./AddReviewModal";
 import { THEMES } from "../../../common/utils/themes";
-
-interface IProps {
-  onClose: () => void;
-}
 
 interface IReviewForm
   extends Pick<
     IReview,
-    | "title"
-    | "recordTitle"
-    | "description"
-    | "imgSrc"
-    | "tags"
-    | "theme"
-    | "rating"
-  > {
-  // file: File[];
+    "title" | "recordTitle" | "description" | "imgSrc" | "theme"
+  > {}
+
+interface IProps {
+  onClose: () => void;
+  reviewId: string;
+  reviewData?: IReviewForm;
 }
 
-export const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-});
-
-export const AddReviewModal: FC<IProps> = ({ onClose }) => {
+export const EditReviewModal: FC<IProps> = ({
+  onClose,
+  reviewData,
+  reviewId,
+}) => {
   const [selectedTab, setSelectedTab] = useState("write");
   const { t } = useTranslation();
-  const [createReview, { isLoading, isSuccess }] = useCreateReviewMutation();
+  const [editReview, { isSuccess }] = useEditReviewMutation();
   const {
     register,
     handleSubmit,
     setValue,
     watch,
     formState: { errors },
-  } = useForm<IReviewForm>();
-
-  const { id } = useParams();
+  } = useForm<IReviewForm>({
+    defaultValues: {
+      ...reviewData,
+    },
+  });
 
   const onSubmit: SubmitHandler<IReviewForm> = async (data) => {
-    await createReview({
+    await editReview({
       ...data,
       imgSrc: data.imgSrc || "",
-      tags: [],
-      rating: [{ value: 5, userId: id || "" }],
+      reviewId: reviewId || "",
     });
   };
 
@@ -91,7 +82,7 @@ export const AddReviewModal: FC<IProps> = ({ onClose }) => {
           borderRadius="5px"
         >
           <Typography variant="h6" fontWeight="600">
-            {t("reviews.modal.general.modalName")}
+            Edit review
           </Typography>
           <TextField
             {...register("title", { required: true })}
@@ -161,7 +152,7 @@ export const AddReviewModal: FC<IProps> = ({ onClose }) => {
               color="success"
               sx={{ borderRadius: "25px" }}
             >
-              {t("reviews.modal.button.send")}
+              {t("reviews.modal.button.save")}
             </Button>
           </Stack>
         </Stack>

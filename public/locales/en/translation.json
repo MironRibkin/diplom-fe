@@ -10,8 +10,9 @@
     }
   },
   "home": {
-    "card": {
-      "cardButton": "Learn More"
+    "review": {
+      "recent": "Latest added:",
+      "ratingReview": "Top Rated:"
     }
   },
   "common": {
@@ -59,7 +60,7 @@
     "review": {
       "created": "Сreated:",
       "comments": "Сomments:",
-      "yourComment": "Your Ccmment",
+      "yourComment": "Your Comment",
       "reviewLike": "Did you like this review?",
       "sendButton": "Send"
 
@@ -73,7 +74,8 @@
       },
       "button": {
         "close": "Close",
-        "send": "Create"
+        "send": "Create",
+        "save": "Save"
       },
       "reactMde": {
         "preview": "Preview",

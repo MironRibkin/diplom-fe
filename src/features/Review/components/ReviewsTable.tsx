@@ -10,14 +10,26 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import { Delete, DeleteForever, Settings } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import MaterialReactTable from "material-react-table";
-import { useDeleteReviewMutation, useGetReviewsQuery } from "../api/reviewApi";
+import {
+  useDeleteReviewMutation,
+  useGetReviewQuery,
+  useGetReviewsQuery,
+} from "../api/reviewApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddReviewModal } from "./AddReviewModal";
 import { useTranslation } from "react-i18next";
+import { EditReviewModal } from "./EditReviewModal";
 
 export const ReviewsTable: FC = () => {
+  const [openId, setOpenId] = useState<string>("");
+  const { data: reviewData, isLoading: isReviewLoading } = useGetReviewQuery(
+    openId,
+    {
+      skip: !openId,
+    }
+  );
   const [rowSelection, setRowSelection] = useState({});
   const { id } = useParams();
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
@@ -32,7 +44,13 @@ export const ReviewsTable: FC = () => {
       {isReviewModalOpen && (
         <AddReviewModal onClose={() => setReviewModalOpen(false)} />
       )}
-
+      {openId && !isReviewLoading && (
+        <EditReviewModal
+          onClose={() => setOpenId("")}
+          reviewData={reviewData}
+          reviewId={openId}
+        />
+      )}
       <MaterialReactTable
         enableColumnFilters={false}
         data={data || []}
@@ -106,6 +124,21 @@ export const ReviewsTable: FC = () => {
                 onClick={() => deleteReview(original.id)}
               >
                 {deviceMediaQuery ? "delete" : undefined}
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<Edit />}
+                sx={{
+                  marginLeft: "4px",
+                  textTransform: "none",
+                  "& .MuiButton-startIcon": { margin: { xs: 0 } },
+                }}
+                onClick={() => {
+                  setOpenId(original.id);
+                }}
+              >
+                {deviceMediaQuery ? "Edit" : undefined}
               </Button>
             </ListItemIcon>
             {/*edit*/}
