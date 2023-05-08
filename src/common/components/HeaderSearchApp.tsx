@@ -22,7 +22,7 @@ export const HeaderSearchApp: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Box width="80%">
+    <Box width="90%">
       <Autocomplete
         filterOptions={(options) => options}
         onOpen={() => {
@@ -38,6 +38,7 @@ export const HeaderSearchApp: FC = () => {
             fullWidth
             size="small"
             placeholder={t("common.header.menu.search") || ""}
+            color="success"
           />
         )}
         getOptionLabel={(option) => option.title || ""}
@@ -50,6 +51,7 @@ export const HeaderSearchApp: FC = () => {
             p="4px 8px 4px 8px"
             direction="row"
             gap="8px"
+            borderRadius="25px"
             alignItems="center"
           >
             <Avatar src={imgSrc} />

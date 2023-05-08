@@ -58,7 +58,6 @@ export const ReviewsTable: FC = () => {
           i18n.language === "en" ? MRT_Localization_EN : MRT_Localization_RU
         }
         renderTopToolbarCustomActions={({ table }) => (
-          // <Stack direction="row" gap="12px" alignItems="space-between" mt="4px">
           <Box
             sx={{
               "& > :not(style)": {
@@ -95,7 +94,7 @@ export const ReviewsTable: FC = () => {
             console.log(row);
           },
           sx: {
-            cursor: "pointer", //you might want to change the cursor too when adding an onClick
+            cursor: "pointer",
           },
         })}
         state={{
@@ -141,7 +140,6 @@ export const ReviewsTable: FC = () => {
                 {deviceMediaQuery ? "Edit" : undefined}
               </Button>
             </ListItemIcon>
-            {/*edit*/}
           </MenuItem>,
         ]}
         columns={[
@@ -161,10 +159,6 @@ export const ReviewsTable: FC = () => {
             accessorKey: "description",
             header: `${t("reviews.table.header.description")}`,
           },
-          // {
-          //   accessorKey: "rating",
-          //   header: "rating",
-          // },
           {
             accessorKey: "theme",
             header: `${t("reviews.table.header.theme")}`,

@@ -64,9 +64,11 @@ export const UserProfile = () => {
           <Avatar {...stringAvatar(data?.userName || "", data?.userName)} />
           <Typography variant="h4">{data?.userName}</Typography>
           <Typography fontSize="12px">{data?.email} </Typography>
-          <Typography variant="h6">{t("profile.myReviews")}</Typography>
         </Box>
       </Box>
+      <Typography margin="8px" variant="h6">
+        {t("profile.myReviews")}:
+      </Typography>
       <ReviewsTable />
     </Paper>
   );

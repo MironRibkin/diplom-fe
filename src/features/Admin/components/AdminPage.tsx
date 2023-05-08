@@ -10,7 +10,9 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TablePagination,
   TableRow,
+  useMediaQuery,
 } from "@mui/material";
 import {
   useAppointAdminMutation,
@@ -22,7 +24,7 @@ import {
 import { AdminTableToolbar } from "./AdminTableToolbar";
 import { UsersTableHeader } from "./AdminTableHeader";
 import { Header } from "../../../common/components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export const AdminPage: FC = () => {
@@ -60,11 +62,28 @@ export const AdminPage: FC = () => {
   const [removeAdmin] = useRemoveAdminMutation();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const deviceMediaQuery = useMediaQuery("(min-width:850px)");
+
   return (
-    <Paper sx={{ width: "100%", mb: 2 }}>
-      <TableContainer>
+    <Paper sx={{ width: "100%", mb: 2, overflow: "auto" }}>
+      <TableContainer sx={{ overflow: "auto" }}>
         <Header />
-        <Box margin="5px">
+        <Box margin="10px">
           <div role="presentation">
             <Breadcrumbs aria-label="breadcrumb">
               <Link
@@ -98,71 +117,82 @@ export const AdminPage: FC = () => {
             rowCount={data?.length || 0}
           />
           <TableBody>
-            {data?.map(({ email, userName, id, role, banned }) => {
-              const isItemSelected = selected.indexOf(id) !== -1;
-              const labelId = `enhanced-table-checkbox-${id}`;
-              return (
-                <TableRow
-                  hover
-                  onClick={(event) => handleClick(event, id)}
-                  role="checkbox"
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  key={id}
-                  selected={isItemSelected}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      checked={isItemSelected}
-                      inputProps={{
-                        "aria-labelledby": labelId,
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell id={labelId} scope="row" sx={{ overflow: "auto" }}>
-                    {id}
-                  </TableCell>
-                  <TableCell>{userName}</TableCell>
-                  <TableCell>{email}</TableCell>
-                  <TableCell>
-                    {role === "user" ? (
-                      <Button color="error" onClick={() => appointAdmin(id)}>
-                        {t("admin.page.role.user")}
-                      </Button>
-                    ) : (
-                      <Button color="success" onClick={() => removeAdmin(id)}>
-                        {t("admin.page.role.admin")}
-                      </Button>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {banned === true ? (
-                      <Button
-                        color="error"
-                        onClick={() => {
-                          unBanUser([id]);
+            {data
+              ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map(({ email, userName, id, role, banned }) => {
+                const isItemSelected = selected.indexOf(id) !== -1;
+                const labelId = `enhanced-table-checkbox-${id}`;
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => handleClick(event, id)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={id}
+                    selected={isItemSelected}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        checked={isItemSelected}
+                        inputProps={{
+                          "aria-labelledby": labelId,
                         }}
-                      >
-                        {t("admin.page.block")}
-                      </Button>
-                    ) : (
-                      <Button
-                        color="success"
-                        onClick={() => {
-                          banUser([id]);
-                        }}
-                      >
-                        {t("admin.page.active")}
-                      </Button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                      />
+                    </TableCell>
+                    <TableCell id={labelId} scope="row">
+                      {id}
+                    </TableCell>
+                    <TableCell>{userName}</TableCell>
+                    <TableCell>{email}</TableCell>
+                    <TableCell>
+                      {role === "user" ? (
+                        <Button color="error" onClick={() => appointAdmin(id)}>
+                          {t("admin.page.role.user")}
+                        </Button>
+                      ) : (
+                        <Button color="success" onClick={() => removeAdmin(id)}>
+                          {t("admin.page.role.admin")}
+                        </Button>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {banned === true ? (
+                        <Button
+                          color="error"
+                          onClick={() => {
+                            unBanUser([id]);
+                          }}
+                        >
+                          {t("admin.page.block")}
+                        </Button>
+                      ) : (
+                        <Button
+                          color="success"
+                          onClick={() => {
+                            banUser([id]);
+                          }}
+                        >
+                          {t("admin.page.active")}
+                        </Button>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25, 100]}
+        component="div"
+        count={data?.length || 0}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
   );
 };

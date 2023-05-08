@@ -65,9 +65,14 @@ export function Header() {
           />
           <HeaderSearchApp />
           <Box sx={{ flexGrow: 1 }} />
-          <Box display="flex" alignItems="center" marginRight="30px">
-            <ColorSwitches />
-            <HeaderSelectLeague />
+          <Box
+            display="flex"
+            alignItems="center"
+            marginRight="10px"
+            marginLeft="10px"
+          >
+            {/*<ColorSwitches />*/}
+            {/*<HeaderSelectLeague />*/}
             <SettingsHeader />
           </Box>
           {localStorage.getItem("token") ? (
