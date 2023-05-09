@@ -71,8 +71,6 @@ export function Header() {
             marginRight="10px"
             marginLeft="10px"
           >
-            {/*<ColorSwitches />*/}
-            {/*<HeaderSelectLeague />*/}
             <SettingsHeader />
           </Box>
           {localStorage.getItem("token") ? (
@@ -127,31 +125,24 @@ export function Header() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>
-          <div onClick={() => navigate(`/myProfile/${data?.id}`)}>
-            {t("common.header.menu.profile")}
-          </div>
+        <MenuItem onClick={() => navigate(`/myProfile/${data?.id}`)}>
+          <div>{t("common.header.menu.profile")}</div>
         </MenuItem>
 
         {data?.role === "admin" && (
-          <MenuItem onClick={handleMenuClose}>
-            <div onClick={() => navigate("/admin")}>
-              {t("common.header.menu.myAccount")}
-            </div>
+          <MenuItem onClick={() => navigate("/admin")}>
+            <div>{t("common.header.menu.myAccount")}</div>
           </MenuItem>
         )}
-        <MenuItem onClick={handleMenuClose}>
+        <MenuItem
+          onClick={() => {
+            localStorage.setItem("token", "");
+            navigate("/login");
+          }}
+        >
           <div>
-            {localStorage.getItem("token") && (
-              <div
-                onClick={() => {
-                  localStorage.setItem("token", "");
-                  navigate("/login");
-                }}
-              >
-                {t("common.header.menu.logOut")}
-              </div>
-            )}
+            {/*{localStorage.getItem("token") && (*/}
+            <div>{t("common.header.menu.logOut")}</div>
           </div>
         </MenuItem>
       </Menu>

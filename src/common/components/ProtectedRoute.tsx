@@ -16,6 +16,5 @@ export const ProtectedRoute: FC<{ children: JSX.Element }> = ({ children }) => {
     toast.error("You are blocked");
     return <Navigate replace to="/login" />;
   }
-
   return children;
 };

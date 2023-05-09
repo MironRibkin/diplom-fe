@@ -65,6 +65,7 @@ export const AddReviewModal: FC<IProps> = ({ onClose }) => {
       imgSrc: data.imgSrc || "",
       tags: [],
       rating: [{ value: 5, userId: id || "" }],
+      author: id || "",
     });
   };
 

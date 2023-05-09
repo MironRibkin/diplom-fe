@@ -77,6 +77,14 @@ export const usersApi = createApi({
         };
       },
     }),
+    getUserById: builder.query<IUser, string>({
+      providesTags: ["Users"],
+      query: (id) => {
+        return {
+          url: `/auth/user/${id}`,
+        };
+      },
+    }),
   }),
 });
 
@@ -88,4 +96,5 @@ export const {
   useAppointAdminMutation,
   useRemoveAdminMutation,
   useUnBanUserMutation,
+  useGetUserByIdQuery,
 } = usersApi;

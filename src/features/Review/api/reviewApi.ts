@@ -40,6 +40,7 @@ export const reviewApi = createApi({
         | "theme"
         | "tags"
         | "rating"
+        | "author"
       >
     >({
       query(review) {

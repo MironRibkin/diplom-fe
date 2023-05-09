@@ -16,6 +16,7 @@ import { UserProfile } from "./features/Profile/components/UserProfile";
 import { ProtectedRoute } from "./common/components/ProtectedRoute";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ReviewPage } from "./features/Review/components/ReviewPage";
+import { UserReview } from "./features/Admin/components/UserReview";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/login" element={<Login />} />
             <Route path="/reviewPage/:id" element={<ReviewPage />} />
             <Route path="/signUp" element={<Registration />} />
+            <Route path="/userReview/:id" element={<UserReview />} />
             <Route
               path="/admin"
               element={

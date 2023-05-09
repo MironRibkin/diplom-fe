@@ -42,27 +42,29 @@ export const ReviewPage: FC = () => {
   return (
     <>
       <Header />
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link
-          sx={{ cursor: "pointer" }}
-          underline="hover"
-          color="inherit"
-          onClick={() => navigate("/Home")}
-        >
-          {t("breadcrumbs.home")}
-        </Link>
-        <Link
-          sx={{ cursor: "pointer" }}
-          underline="hover"
-          color="inherit"
-          onClick={() => navigate(`/myProfile/${userData?.id}`)}
-        >
-          {t("breadcrumbs.profile")}
-        </Link>
-        <Link underline="none" color="inherit">
-          {data?.title}
-        </Link>
-      </Breadcrumbs>
+      <Box margin="10px">
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link
+            sx={{ cursor: "pointer" }}
+            underline="hover"
+            color="inherit"
+            onClick={() => navigate("/Home")}
+          >
+            {t("breadcrumbs.home")}
+          </Link>
+          <Link
+            sx={{ cursor: "pointer" }}
+            underline="hover"
+            color="inherit"
+            onClick={() => navigate(`/myProfile/${userData?.id}`)}
+          >
+            {t("breadcrumbs.profile")}
+          </Link>
+          <Link underline="none" color="inherit">
+            {data?.title}
+          </Link>
+        </Breadcrumbs>
+      </Box>
       <Stack
         height="calc(100vh - 200px)"
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -150,7 +152,13 @@ export const ReviewPage: FC = () => {
                   </Typography>
                 </Box>
                 <Stack display="flex" flexDirection="column">
-                  <Paper square sx={{ pb: "10px" }}>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontFamily: "Fira Mono monospace" }}
+                  >
+                    {t("reviews.review.comments")}
+                  </Typography>
+                  <Box>
                     <List
                       sx={{
                         mb: 2,
@@ -159,12 +167,6 @@ export const ReviewPage: FC = () => {
                         maxHeight: "400px",
                       }}
                     >
-                      <Typography
-                        variant="h5"
-                        sx={{ fontFamily: "Fira Mono monospace" }}
-                      >
-                        {t("reviews.review.comments")}
-                      </Typography>
                       {data?.messages.map(({ sender, body, date }) => (
                         <React.Fragment key={id}>
                           <ListItem>
@@ -176,7 +178,7 @@ export const ReviewPage: FC = () => {
                                 display="flex"
                                 justifyContent="space-between"
                                 gap="25px"
-                                alignItems="center"
+                                alignItems="flex-start"
                                 height="100%"
                               >
                                 <ListItemText primary={sender} />
@@ -228,7 +230,7 @@ export const ReviewPage: FC = () => {
                         </Button>
                       </Box>
                     )}
-                  </Paper>
+                  </Box>
                   {userData && (
                     <Box
                       display="flex"

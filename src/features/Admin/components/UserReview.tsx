@@ -9,25 +9,26 @@ import {
   Typography,
 } from "@mui/material";
 import { Header } from "../../../common/components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ReviewsTable } from "../../Review/components/ReviewsTable";
-import { useGetUserQuery } from "../../Admin/api/usersApi";
+import { useGetUserByIdQuery } from "../../Admin/api/usersApi";
 import { stringAvatar } from "../../../common/utils/stringAvatar";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
 }
 
-export const UserProfile = () => {
+export const UserReview = () => {
+  const { id } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { data } = useGetUserQuery();
+  const { data: userData } = useGetUserByIdQuery(id || "");
+  console.log(userData);
 
   return (
     <Paper sx={{ width: "100%", mb: 2, height: "100%" }}>
       <Header />
-
       <Box margin="10px">
         <div role="presentation" onClick={handleClick}>
           <Breadcrumbs aria-label="breadcrumb">
@@ -39,14 +40,7 @@ export const UserProfile = () => {
             >
               {t("breadcrumbs.home")}
             </Link>
-            <Link
-              sx={{ cursor: "pointer" }}
-              underline="hover"
-              color="inherit"
-              onClick={() => navigate("/myProfile")}
-            >
-              {t("breadcrumbs.profile")}
-            </Link>
+            <Link color="inherit">{userData?.userName}</Link>
           </Breadcrumbs>
         </div>
       </Box>
@@ -61,15 +55,20 @@ export const UserProfile = () => {
           padding="10px"
           gap="6px"
         >
-          <Avatar {...stringAvatar(data?.userName || "", data?.userName)} />
-          <Typography variant="h4">{data?.userName}</Typography>
-          <Typography fontSize="12px">{data?.email} </Typography>
+          <Typography variant="h5" color="error" margin="10px">
+            {t("profile.account")}
+          </Typography>
+          <Avatar
+            {...stringAvatar(userData?.userName || "", userData?.userName)}
+          />
+          <Typography variant="h4">{userData?.userName}</Typography>
+          <Typography fontSize="12px">{userData?.email} </Typography>
         </Box>
       </Box>
       <Typography margin="8px" variant="h6">
-        {t("profile.myReviews")}:
+        {t("profile.adminReview")}: {userData?.userName}
       </Typography>
-      <ReviewsTable />
+      <ReviewsTable />;
     </Paper>
   );
 };

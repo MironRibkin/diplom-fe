@@ -36,7 +36,6 @@ export const ReviewsTable: FC = () => {
   const { data, isLoading } = useGetReviewsQuery(id || "");
   const { t } = useTranslation();
   const [deleteReview] = useDeleteReviewMutation();
-  const deviceMediaQuery = useMediaQuery("(min-width:850px)");
   const navigate = useNavigate();
 
   return (
@@ -91,7 +90,6 @@ export const ReviewsTable: FC = () => {
         muiTableBodyRowProps={({ row }) => ({
           onClick: (event) => {
             navigate(`/reviewPage/${row.original.id}`);
-            console.log(row);
           },
           sx: {
             cursor: "pointer",
@@ -122,7 +120,7 @@ export const ReviewsTable: FC = () => {
                 }}
                 onClick={() => deleteReview(original.id)}
               >
-                {deviceMediaQuery ? "delete" : undefined}
+                {t("admin.toolbar.delete")}
               </Button>
               <Button
                 variant="contained"
@@ -137,7 +135,7 @@ export const ReviewsTable: FC = () => {
                   setOpenId(original.id);
                 }}
               >
-                {deviceMediaQuery ? "Edit" : undefined}
+                {t("reviews.modal.button.editButton")}
               </Button>
             </ListItemIcon>
           </MenuItem>,

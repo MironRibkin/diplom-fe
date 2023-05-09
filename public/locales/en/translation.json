@@ -43,9 +43,7 @@
     },
     "toolbar": {
       "delete": "Delete",
-      "block": "Block",
-      "unblock": "Unblock",
-      "title": "Users"
+      "view": "View profile"
     }
   },
   "breadcrumbs": {
@@ -54,16 +52,18 @@
     "profile": "Profile"
   },
   "profile": {
-    "myReviews": "My reviews"
+    "myReviews": "My reviews",
+    "adminReview": "User Reviews",
+    "account": "Current account:"
+
   },
   "reviews": {
     "review": {
-      "created": "Сreated:",
-      "comments": "Сomments:",
+      "created": "Created:",
+      "comments": "Comments:",
       "yourComment": "Your Comment",
       "reviewLike": "Did you like this review?",
       "sendButton": "Send"
-
     },
     "modal": {
       "general": {
@@ -75,7 +75,8 @@
       "button": {
         "close": "Close",
         "send": "Create",
-        "save": "Save"
+        "save": "Save",
+        "editButton": "Edit"
       },
       "reactMde": {
         "preview": "Preview",
