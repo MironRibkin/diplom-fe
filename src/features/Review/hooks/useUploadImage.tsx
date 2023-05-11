@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export const useUploadImage = () => {
+interface IUseUploadImageReturn {
+  isLoading: boolean;
+  url: string;
+  uploadImage: (file?: File) => Promise<void>;
+}
+
+export const useUploadImage = (): IUseUploadImageReturn => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
 

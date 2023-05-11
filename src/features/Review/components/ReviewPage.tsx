@@ -1,9 +1,7 @@
 import {
   Avatar,
   Box,
-  Breadcrumbs,
   Button,
-  Link,
   Paper,
   Rating,
   Stack,
@@ -19,14 +17,15 @@ import {
   useAddRatingMutation,
   useGetReviewQuery,
 } from "../api/reviewApi";
-import { useNavigate, useParams } from "react-router-dom";
-import { Header } from "../../../common/components/Header";
+import { useParams } from "react-router-dom";
 import { useGetUserQuery } from "../../Admin/api/usersApi";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { stringAvatar } from "../../../common/utils/stringAvatar";
+import { PageWrapper } from "../../../common/components/PageWrapper";
+import { AverageRating } from "./AverageRating";
 
 export const ReviewPage: FC = () => {
   const { id } = useParams();
@@ -34,37 +33,18 @@ export const ReviewPage: FC = () => {
   const { data: userData } = useGetUserQuery();
   const [comment, setComment] = useState("");
   const [addComment] = useAddCommentMutation();
-  const navigate = useNavigate();
   const deviceMediaQuery = useMediaQuery("(min-width:850px)");
   const { t } = useTranslation();
   const [addRating] = useAddRatingMutation();
 
   return (
-    <>
-      <Header />
-      <Box margin="10px">
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            sx={{ cursor: "pointer" }}
-            underline="hover"
-            color="inherit"
-            onClick={() => navigate("/Home")}
-          >
-            {t("breadcrumbs.home")}
-          </Link>
-          <Link
-            sx={{ cursor: "pointer" }}
-            underline="hover"
-            color="inherit"
-            onClick={() => navigate(`/myProfile/${userData?.id}`)}
-          >
-            {t("breadcrumbs.profile")}
-          </Link>
-          <Link underline="none" color="inherit">
-            {data?.title}
-          </Link>
-        </Breadcrumbs>
-      </Box>
+    <PageWrapper
+      breadcrumbs={[
+        { url: "/home", title: t("breadcrumbs.home") },
+        { url: `/myProfile/${userData?.id}`, title: t("breadcrumbs.profile") },
+        { title: data?.title },
+      ]}
+    >
       <Stack
         height="calc(100vh - 200px)"
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -94,21 +74,11 @@ export const ReviewPage: FC = () => {
               <Typography fontSize="15px">
                 {t("reviews.review.created")}
               </Typography>
-              <Rating
-                name="read-only"
-                value={
-                  data?.rating
-                    ? data?.rating.reduce((acc, item) => acc + item.value, 0) /
-                      data?.rating.length
-                    : 0
-                }
-                readOnly
-                size="small"
-              />
+              <AverageRating ratings={data?.rating} />
             </Box>
             <Box display="flex" marginTop="5px" gap="5px">
               <Box>
-                <Avatar {...stringAvatar("a" || "", data?.author)} />
+                <Avatar {...stringAvatar(data?.author)} />
               </Box>
               <Box>
                 <Typography fontSize="15px">{data?.author}</Typography>
@@ -171,7 +141,7 @@ export const ReviewPage: FC = () => {
                         <React.Fragment key={id}>
                           <ListItem>
                             <ListItemAvatar>
-                              <Avatar {...stringAvatar(sender || "", sender)} />
+                              <Avatar {...stringAvatar(sender)} />
                             </ListItemAvatar>
                             <Box display="flex" flexDirection="column">
                               <Box
@@ -271,6 +241,6 @@ export const ReviewPage: FC = () => {
           </Stack>
         </Paper>
       </Stack>
-    </>
+    </PageWrapper>
   );
 };

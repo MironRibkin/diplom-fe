@@ -1,6 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IUser } from "../types/users";
 import { prepareAuthHeaders } from "../../../common/utils/prepareAuthHeaders";
+
+interface IUser {
+  id: string;
+  userName: string;
+  email: string;
+  banned: boolean;
+  avatarSrc: string;
+  role: string;
+  status: string;
+}
 
 export const usersApi = createApi({
   reducerPath: "usersApi",

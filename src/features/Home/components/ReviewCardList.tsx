@@ -3,10 +3,11 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Avatar, Box, Rating, Stack, useMediaQuery } from "@mui/material";
+import { Avatar, Box, Stack, useMediaQuery } from "@mui/material";
 import { IReview } from "../../Review/api/reviewApi";
 import { useNavigate } from "react-router-dom";
 import { stringAvatar } from "../../../common/utils/stringAvatar";
+import { AverageRating } from "../../Review/components/AverageRating";
 
 interface IProps {
   reviews?: IReview[];
@@ -46,22 +47,12 @@ export const ReviewCardList: FC<IProps> = ({ reviews = [] }) => {
             src={review?.imgSrc}
           />
           <CardContent>
-            <Rating
-              name="read-only"
-              value={
-                review?.rating
-                  ? review?.rating.reduce((acc, item) => acc + item.value, 0) /
-                    review?.rating.length
-                  : 0
-              }
-              readOnly
-              size="small"
-            />
+            <AverageRating ratings={review?.rating} />
             <Typography variant="h5" component="div">
               {review?.title}
             </Typography>
             <Box display="flex" gap="10px">
-              <Avatar {...stringAvatar(review?.author || "", review.author)} />
+              <Avatar {...stringAvatar(review.author)} />
               <Box
                 display="flex"
                 alignItems="center"

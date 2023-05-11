@@ -2,13 +2,7 @@ import React, { FC, useState } from "react";
 import i18n from "i18next";
 import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
-import {
-  Box,
-  Button,
-  ListItemIcon,
-  MenuItem,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, ListItemIcon, MenuItem } from "@mui/material";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { Delete, Edit } from "@mui/icons-material";
 import MaterialReactTable from "material-react-table";
@@ -24,12 +18,6 @@ import { EditReviewModal } from "./EditReviewModal";
 
 export const ReviewsTable: FC = () => {
   const [openId, setOpenId] = useState<string>("");
-  const { data: reviewData, isLoading: isReviewLoading } = useGetReviewQuery(
-    openId,
-    {
-      skip: !openId,
-    }
-  );
   const [rowSelection, setRowSelection] = useState({});
   const { id } = useParams();
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
@@ -37,6 +25,12 @@ export const ReviewsTable: FC = () => {
   const { t } = useTranslation();
   const [deleteReview] = useDeleteReviewMutation();
   const navigate = useNavigate();
+  const { data: reviewData, isLoading: isReviewLoading } = useGetReviewQuery(
+    openId,
+    {
+      skip: !openId,
+    }
+  );
 
   return (
     <>

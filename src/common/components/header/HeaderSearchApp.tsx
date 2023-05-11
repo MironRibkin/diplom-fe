@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import {
   useGetAllReviewsQuery,
   useLazyGetAllReviewsQuery,
-} from "../../features/Review/api/reviewApi";
+} from "../../../features/Review/api/reviewApi";
 import { useNavigate } from "react-router-dom";
 
 export const HeaderSearchApp: FC = () => {

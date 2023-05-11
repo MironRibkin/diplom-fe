@@ -1,4 +1,4 @@
-function stringToColor(string: string) {
+const stringToColor = (string: string) => {
   let hash = 0;
   let i;
 
@@ -14,12 +14,12 @@ function stringToColor(string: string) {
   }
 
   return color;
-}
+};
 
-export function stringAvatar(name: string, userName = "") {
+export const stringAvatar = (userName = "") => {
   return {
     sx: {
-      bgcolor: stringToColor(name),
+      bgcolor: stringToColor(userName),
       textAlign: "center",
       width: "40px",
       height: "40px",
@@ -27,4 +27,4 @@ export function stringAvatar(name: string, userName = "") {
     },
     children: userName ? `${userName.split(" ")[0][0]}` : undefined,
   };
-}
+};

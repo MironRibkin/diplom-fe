@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled, useColorScheme } from "@mui/material/styles";
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
@@ -55,13 +54,11 @@ export function ColorSwitches() {
   const { mode, setMode } = useColorScheme();
 
   return (
-    <FormGroup>
-      <FormControlLabel
-        checked={mode === "dark"}
-        onChange={() => setMode(mode === "dark" ? "light" : "dark")}
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        label=""
-      />
-    </FormGroup>
+    <FormControlLabel
+      checked={mode === "dark"}
+      onChange={() => setMode(mode === "dark" ? "light" : "dark")}
+      control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+      label=""
+    />
   );
 }

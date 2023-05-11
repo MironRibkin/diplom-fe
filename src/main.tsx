@@ -5,18 +5,18 @@ import { theme } from "./theme";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import { Login } from "./features/Auth/components/Login";
-import { Registration } from "./features/Auth/components/Registration";
+import { LoginPage } from "./features/Auth/components/LoginPage";
+import { RegistrationPage } from "./features/Auth/components/RegistrationPage";
 import { Toaster } from "react-hot-toast";
 import { AdminPage } from "./features/Admin/components/AdminPage";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import "./common/i18n";
-import { Home } from "./features/Home/components/Home";
-import { UserProfile } from "./features/Profile/components/UserProfile";
+import { HomePage } from "./features/Home/components/HomePage";
+import { UserProfilePage } from "./features/Profile/components/UserProfilePage";
 import { ProtectedRoute } from "./common/components/ProtectedRoute";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ReviewPage } from "./features/Review/components/ReviewPage";
-import { UserReview } from "./features/Admin/components/UserReview";
+import { UserReviewPage } from "./features/Admin/components/UserReviewPage";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
@@ -25,16 +25,23 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <CssBaseline />
         <Provider store={store}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/reviewPage/:id" element={<ReviewPage />} />
-            <Route path="/signUp" element={<Registration />} />
-            <Route path="/userReview/:id" element={<UserReview />} />
+            <Route path="/signUp" element={<RegistrationPage />} />
             <Route
               path="/admin"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute onlyAdmin>
                   <AdminPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/userReview/:id"
+              element={
+                <ProtectedRoute onlyAdmin>
+                  <UserReviewPage />
                 </ProtectedRoute>
               }
             />
@@ -42,11 +49,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               path="/myProfile/:id"
               element={
                 <ProtectedRoute>
-                  <UserProfile />
+                  <UserProfilePage />
                 </ProtectedRoute>
               }
             />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<HomePage />} />
           </Routes>
           <Toaster />
         </Provider>
