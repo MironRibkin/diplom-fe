@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface IAuthRecord {
-  status: boolean;
+  banned: boolean;
 }
 
 interface ILoginApiResponse {

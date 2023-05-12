@@ -99,12 +99,13 @@ export const ReviewForm: FC<IProps> = ({
           <InputLabel>{t("reviews.modal.general.theme")}</InputLabel>
           <Select
             {...register("theme")}
+            value={watch("theme")}
             label={t("reviews.modal.general.theme")}
             color="success"
           >
             {THEMES.map((value) => (
               <MenuItem key={value} value={value}>
-                {t(`${value}`)}
+                {t(`general.themes.${value}`)}
               </MenuItem>
             ))}
           </Select>

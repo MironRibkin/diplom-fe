@@ -42,7 +42,7 @@ export const ReviewCardList: FC<IProps> = ({ reviews = [] }) => {
         >
           <CardMedia
             component="img"
-            alt="No image =("
+            alt="NO IMAGE"
             height="170"
             src={review?.imgSrc}
           />

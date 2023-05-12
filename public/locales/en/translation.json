@@ -68,6 +68,7 @@
     "modal": {
       "general": {
         "modalName": "Create reviews",
+        "editModalName": "Edit review",
         "title": "Title",
         "recordTitle": "Record title",
         "theme": "Theme"
@@ -99,8 +100,9 @@
   "general": {
     "themes": {
       "books": "Books",
-      "film": "Film",
+      "films": "Film",
       "painting": "Painting",
+      "games": "Games",
       "comics": "Comics",
       "art": "Art",
       "sport": "Sport",

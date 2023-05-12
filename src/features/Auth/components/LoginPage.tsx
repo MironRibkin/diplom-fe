@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoginMutation } from "../api/authApi";
 import { useTranslation } from "react-i18next";
 import { PageWrapper } from "../../../common/components/PageWrapper";
+import toast from "react-hot-toast";
 
 export interface ILoginForm {
   email: string;
@@ -25,11 +26,15 @@ export const LoginPage: FC = () => {
   };
 
   useEffect(() => {
+    if (data?.record.banned) {
+      toast.error("Вы были забанены");
+      return;
+    }
     if (data?.token) {
       localStorage.setItem("token", data.token ?? "");
       navigate("/home", { replace: true });
     }
-  }, [data?.token]);
+  }, [data?.token, data?.record.banned]);
 
   const { t } = useTranslation();
 

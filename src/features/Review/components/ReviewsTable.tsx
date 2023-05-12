@@ -154,6 +154,8 @@ export const ReviewsTable: FC = () => {
           {
             accessorKey: "theme",
             header: `${t("reviews.table.header.theme")}`,
+            Cell: ({ row: { original } }) =>
+              t(`general.themes.${original.theme}`),
           },
           {
             accessorKey: "date",

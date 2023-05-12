@@ -33,7 +33,9 @@ export const AddReviewModal: FC<IProps> = ({ onClose }) => {
         onSubmit={async (data) =>
           await createReview({
             ...data,
-            imgSrc: data.imgSrc || "",
+            imgSrc:
+              data.imgSrc ||
+              "http://res.cloudinary.com/project-diplom/image/upload/v1683877209/t0o1vt4pjoig7b146rzw.png",
             tags: [],
             rating: [{ value: 5, userId: id || "" }],
             author: id || "",

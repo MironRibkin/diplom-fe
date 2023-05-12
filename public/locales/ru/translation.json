@@ -12,7 +12,7 @@
   "home": {
     "review": {
       "recent": "Последние добавленные:",
-      "ratingReview": "С наивысшим рейтингом:"
+      "ratingReview": "С наивысшем рейтингом:"
     }
   },
   "common": {
@@ -67,6 +67,7 @@
     "modal": {
       "general": {
         "modalName": "Создание обзора",
+        "editModalName": "Редактирование обзора",
         "title": "Заголовок",
         "recordTitle": "Название обзора",
         "theme": "Тема"
@@ -98,8 +99,9 @@
   "general": {
     "themes": {
       "books": "Книги",
-      "film": "Фильмы",
+      "films": "Фильмы",
       "painting": "Картины",
+      "games": "Игры",
       "comics": "Комиксы",
       "art": "Искусство",
       "sport": "Спорт",

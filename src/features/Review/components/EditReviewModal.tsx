@@ -37,7 +37,7 @@ export const EditReviewModal: FC<IProps> = ({
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <ReviewForm
-        title={" Edit review"}
+        title={t("reviews.modal.general.editModalName")}
         submitButtonTitle={t("reviews.modal.button.save")}
         // @ts-ignore
         defaultValues={reviewData}

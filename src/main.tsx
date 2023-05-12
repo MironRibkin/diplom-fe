@@ -23,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ThemeProvider theme={theme}>
       <CssVarsProvider>
         <CssBaseline />
+        <Toaster />
         <Provider store={store}>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -55,7 +56,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             />
             <Route path="/home" element={<HomePage />} />
           </Routes>
-          <Toaster />
         </Provider>
       </CssVarsProvider>
     </ThemeProvider>
