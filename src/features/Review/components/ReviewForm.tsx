@@ -13,7 +13,7 @@ import {
 import { THEMES } from "../../../common/utils/themes";
 import ReactMde from "react-mde";
 import { converter } from "../../../common/utils/showdownConfig";
-import { UploadImages } from "./UploadImages";
+import { UploadImages } from "../../../common/components/UploadImages";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { IReview } from "../api/reviewApi";

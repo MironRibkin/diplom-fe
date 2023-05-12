@@ -98,6 +98,9 @@
   }
 },
   "general": {
+    "toast": {
+      "block": "You are blocked"
+    },
     "themes": {
       "books": "Books",
       "films": "Film",

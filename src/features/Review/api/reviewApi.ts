@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { prepareAuthHeaders } from "../../../common/utils/prepareAuthHeaders";
 
+export interface IRating {
+  value: number;
+  userId: string;
+}
+
 export interface IReview {
   id: string;
   author: string;
@@ -10,7 +15,7 @@ export interface IReview {
   tags: { name: string }[];
   description: string;
   imgSrc: string;
-  rating: { value: number; userId: string }[];
+  rating: IRating[];
   date: string;
   messages: IMessage[];
 }

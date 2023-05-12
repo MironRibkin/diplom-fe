@@ -2,11 +2,14 @@ import { Navigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FC } from "react";
 import { useGetUserQuery } from "../../features/Admin/api/usersApi";
+import { useTranslation } from "react-i18next";
 
 export const ProtectedRoute: FC<{
   children: JSX.Element;
   onlyAdmin?: boolean;
 }> = ({ children, onlyAdmin }) => {
+  const { t } = useTranslation();
+
   const { isError, data } = useGetUserQuery(undefined, {
     skip: !localStorage.getItem("token"),
   });
@@ -15,7 +18,7 @@ export const ProtectedRoute: FC<{
   }
   if (isError) {
     localStorage.clear();
-    toast.error("You are blocked");
+    toast.error(t("general.toast.block"));
     return <Navigate replace to="/login" />;
   }
   if (onlyAdmin && data?.role !== "admin") {

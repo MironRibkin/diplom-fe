@@ -15,6 +15,8 @@ export interface ILoginForm {
 export const LoginPage: FC = () => {
   const [login, { data }] = useLoginMutation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -27,7 +29,7 @@ export const LoginPage: FC = () => {
 
   useEffect(() => {
     if (data?.record.banned) {
-      toast.error("Вы были забанены");
+      toast.error(t("general.toast.block"));
       return;
     }
     if (data?.token) {
@@ -35,8 +37,6 @@ export const LoginPage: FC = () => {
       navigate("/home", { replace: true });
     }
   }, [data?.token, data?.record.banned]);
-
-  const { t } = useTranslation();
 
   return (
     <PageWrapper>
