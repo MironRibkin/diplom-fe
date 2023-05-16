@@ -44,7 +44,7 @@ export const ReviewDescription: FC<IProps> = ({
           <Typography variant="h4">{title}</Typography>
           <Typography fontSize="20px">{recordTitle}</Typography>
           <Typography fontSize="17px">
-            {t("reviews.table.header.theme")}: {theme}
+            {t("reviews.table.header.theme")}: {t(`general.themes.${theme}`)}
           </Typography>
           <Typography fontSize="16px">{description}</Typography>
         </Box>

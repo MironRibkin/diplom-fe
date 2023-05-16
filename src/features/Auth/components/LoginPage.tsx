@@ -57,9 +57,9 @@ export const LoginPage: FC = () => {
             })}
             required
             fullWidth
-            label="Email Address"
+            label={t("auth.registration.email")}
             error={!!errors?.email}
-            helperText={!!errors?.email && "Email is not valid"}
+            helperText={!!errors?.email && t("auth.registration.emailError")}
           />
           <TextField
             margin="normal"
@@ -68,10 +68,12 @@ export const LoginPage: FC = () => {
             })}
             required
             fullWidth
-            label="Password"
+            label={t("auth.registration.password")}
             type="password"
             error={!!errors?.password}
-            helperText={!!errors?.password && "Password is not valid"}
+            helperText={
+              !!errors?.password && t("auth.registration.emailPassword")
+            }
           />
           <Button
             type="submit"

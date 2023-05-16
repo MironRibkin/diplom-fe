@@ -38,9 +38,9 @@ export const RegistrationForm: FC<IProps> = ({ registration }) => {
             required
             fullWidth
             autoFocus
-            label="Name"
+            label={t("auth.registration.name")}
             error={!!errors?.userName}
-            helperText={!!errors?.userName && "Name is not valid"}
+            helperText={!!errors?.userName && t("auth.registration.nameError")}
           />
         </Grid>
         <Grid item xs={12}>
@@ -50,9 +50,9 @@ export const RegistrationForm: FC<IProps> = ({ registration }) => {
             })}
             required
             fullWidth
-            label="Email Address"
+            label={t("auth.registration.email")}
             error={!!errors?.email}
-            helperText={!!errors?.email && "Email is not valid"}
+            helperText={!!errors?.email && t("auth.registration.emailError")}
           />
         </Grid>
         <Grid item xs={12}>
@@ -62,10 +62,12 @@ export const RegistrationForm: FC<IProps> = ({ registration }) => {
             })}
             required
             fullWidth
-            label="Password"
+            label={t("auth.registration.password")}
             type="password"
             error={!!errors?.password}
-            helperText={!!errors?.password && "Password is not valid"}
+            helperText={
+              !!errors?.password && t("auth.registration.passwordError")
+            }
           />
         </Grid>
       </Grid>

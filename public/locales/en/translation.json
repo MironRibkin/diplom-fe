@@ -6,7 +6,13 @@
     },
     "registration": {
       "title": "Sign up",
-      "login": "Already have an account? Sign in"
+      "login": "Already have an account? Sign in",
+      "nameError": "Name is not valid",
+      "emailError": "Email is not valid",
+      "passwordError": "Password is not valid",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password"
     }
   },
   "home": {
