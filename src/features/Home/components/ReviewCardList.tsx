@@ -29,6 +29,7 @@ export const ReviewCardList: FC<IProps> = ({ reviews = [] }) => {
     >
       {reviews.map((review) => (
         <Card
+          key={review.id}
           sx={{
             display: "flex",
             flexDirection: "column",
